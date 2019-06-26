@@ -1,0 +1,5 @@
+/* pages/team_sale/team_share.wxss */
+.pay-attention image{width: 30px;height: 30px;}
+.productImage image{width: 80px;height: 80px;}
+.zcjy-product-check .price>text:nth-child(1){color: #ff4e44;}
+.share-bill .partner .partner-item image{width:35px;height: 35px;}

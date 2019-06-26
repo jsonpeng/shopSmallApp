@@ -1,0 +1,23 @@
+<import src="../../template/common/list.wxml"  />
+
+<view class="credit">
+  <view class="head" style='background:{{maincolor}}'>
+    <view class="intr">尊敬的会员您好，您的积分为</view>
+    <view class="num">{{ user.user.credits }}</view>
+  </view>
+  <view class="credit-body">
+    <view class="g-title weui-flex">
+      <view class="weui-flex__item">时间</view>
+      <view class="weui-flex__item">积分余额</view>
+      <view class="weui-flex__item">积分变动</view>
+      <view class="weui-flex__item ">说明</view>
+    </view>
+
+  <block wx:for="{{ credits }}" wx:key="key" wx:for-item="{{ item}}">
+     <template is="myself_account_list" data="{{ item }}"> </template>
+  </block>
+ 
+  
+
+  </view>
+</view>

@@ -1,0 +1,126 @@
+<!--pages/team_sale/team_share.wxml-->
+<view class="pay-attention weui-cell">
+  <view class="weui-cell__hd">
+    <image src="../../images/bank1.png" alt=""></image>
+  </view>
+  <view class="weui-cell__bd">上百种免费商品限量速抢</view>
+  <view class="weui-cell__ft">
+    <text  bindtap='show'>立即关注</text>
+  </view>
+</view>
+<view class="zcjy-product-check">
+  <view class="productImage">
+    <image src="http://temp.im/80x80/333/EEE"></image>
+  </view>
+  <view class="product-name">iphone x</view>
+  <view class="remark"></view>
+  <view class="price">
+    <text style="float: left;">¥8888</text>
+    <text style="float: right; margin-right: 0.75rem;">x8</text>
+  </view>
+</view>
+<view class="weui-cell promise-list">
+  <view class="promise-item">
+    <text class="icon ion-ios-checkmark-outline"></text>全场包邮</view>
+  <view class="promise-item">
+    <i class="icon ion-ios-checkmark-outline"></i>7天退换</view>
+  <view class="promise-item">
+    <i class="icon ion-ios-checkmark-outline"></i>48小时发货</view>
+  <view class="promise-item">
+    <i class="icon ion-ios-checkmark-outline"></i>假一陪十</view>
+</view>
+<view class="share-bill">
+  <view class="title">
+    <view>
+      <i class="icon ion-person-stalker"></i>拼单未满，还差
+      <text class="num">1</text><text>人，剩余</text>
+      <view class="time">
+        <i>00</i>:
+        <i>00</i>:
+        <i>00</i>
+      </view>
+    </view>
+  </view>
+  <view class="partner">
+    <view class="partner-item active">
+      <text class="label">拼主</text>
+      <image src="../../images/bank1.png" alt=""></image>
+    </view>
+    <view class="partner-item ">
+      <image src="../../images/bank1.png" alt=""></image>
+    </view>
+    <view class="partner-item empty">
+      <i class="icon ion-help"></i>
+    </view>
+  </view>
+  <navigator url="javascript:;" class="weui-btn share-join">立即参与拼单</navigator>
+  <view class="other-share">
+    <view>或参加别人的拼单</view>
+  </view>
+  <view class="other-share-list">
+    <view class="other-share-item weui-cell">
+      <view class="weui-cell__hd">
+        <view class="img">
+          <image src="../../images/bank1.png" alt=""></image>
+        </view>
+        <text class="user-name">爱我的你122</text>
+      </view>
+      <view class="weui-cell__bd">
+        <view>还差
+          <text class="num">1</text>人拼成</view>
+        <view class="last-time">
+          剩余
+          <i>23</i>:
+          <i>58</i>:
+          <i>12</i>
+        </view>
+      </view>
+      <view class="weui-cell__ft">
+        <navigator url="javascript:;">去拼单</navigator>
+      </view>
+    </view>
+    <view class="other-share-item weui-cell">
+      <view class="weui-cell__hd">
+        <view class="img">
+          <image src="../../images/bank1.png" alt=""></image>
+        </view>
+        <text class="user-name">爱我的你122</text>
+      </view>
+      <view class="weui-cell__bd">
+        <view>还差
+          <text class="num">1</text>人拼成</view>
+        <view class="last-time">
+          剩余
+          <i>23</i>:
+          <i>58</i>:
+          <i>12</i>
+        </view>
+      </view>
+      <view class="weui-cell__ft">
+        <navigator url="javascript:;">去拼单</navigator>
+      </view>
+    </view>
+  </view>
+  <view class="tips weui-cell">
+    <view class="weui-cell__hd">拼单须知</view>
+    <view class="weui-cell__bd">好友拼单·人满发货·人不满退款</view>
+  </view>
+</view>
+<!-- 	点击关注弹出层 -->
+<view class="alert-cover" hidden="{{flag}}">
+  <view class="content">
+    <navigator url="javascript:;" class="close-btn" bindtap='hide'>
+      <i class="icon ion-ios-close-empty"></i>
+    </navigator>
+    <view class="title">长按指纹识别二维码，关注我们</view>
+    <view class="info">关注后继续购买，才能接收发货通知</view>
+    <view class="qrcode-list">
+      <view class="qrcode">
+        <image src="../../images/default/QRcode.png" alt=""></image>
+      </view>
+      <view class="print">
+        <image src="../../images/default/print.png" alt=""></image>
+      </view>
+    </view>
+  </view>
+</view>

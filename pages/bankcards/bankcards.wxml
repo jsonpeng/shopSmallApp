@@ -1,0 +1,28 @@
+<!--pages/bankcards/bankcards.wxml-->
+<view class="bankcard">
+  <!-- @foreach($bankcards as $item) -->
+  <navigator class="bc-1" href="/usercenter/bankcards/edit/{!! $item->id !!}">
+    <view class="card weui-media-box weui-media-box_appmsg">
+      <view class="weui-media-box__hd">
+        <image src="../../images/bank1.png" class="weui-media-box__thumb" alt=""></image>
+      </view>
+      <view class="weui-media-box__bd">
+        <text class="weui-media-box__title">工商银行</text>
+        <text class="weui-media-box__desc">储蓄卡</text>
+      </view>
+    </view>
+    <view class="weui-media-box weui-media-box_desc">
+      <view class="cardnum">
+        <text class="points">····</text>
+        <text class="points">····</text>
+        <text class="points">····</text>
+        1166
+      </view>
+    </view>
+  </navigator>
+  <!-- @endforeach -->
+
+  <view class="add-card">
+    <navigator url="../bankcards/add">+ 添加新卡片</navigator>
+  </view>
+</view>

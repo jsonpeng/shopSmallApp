@@ -1,0 +1,6 @@
+<import src="../../template/social/found.wxml"  />
+<import src="../../template/common/img-loader/img-loader.wxml"/>
+
+<template is="{{ theme }}"  data="{{...themeData}}"></template>
+
+<template is="img-loader" data="{{ imgLoadList }}"></template>

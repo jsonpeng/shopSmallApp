@@ -1,0 +1,51 @@
+<!--pages/orders/orders.wxml-->
+<!-- <text>pages/orders/orders.wxml</text> -->
+<view class="navbar">
+  <view wx:for="{{navbar}}" data-idx="{{index}}" class="item {{currentTab==index ? 'active' : ''}}" wx:key="item" bindtap="navbarTap"><text>{{item}}</text></view>
+</view>
+
+<scroll-view scroll-y="true" bindscrolltolower="pullUpLoad" style="height: {{ winHeight }}px;">
+<block wx:for="{{ orders }}" wx:key="item" wx:for-index="index1">
+<navigator class="order-item" url="order_detail?order_id={{ item.id }}">
+  <view class="order-item-title">
+    <text class="title">购买时间 {{ item.created_at }}</text>
+    <text class="status">{{ item.status }}</text>
+  </view>
+
+  <view class="zcjy-product-check" wx:for="{{ item.items }}" wx:key="key" wx:for-item="items" wx:for-index="index2">
+    <image src="{{ items.pic }}"  data-src="{{ items.pic }}" class="productImage" onerror="this.src= '/images/default.jpg' "></image>
+    <view class="product-name">{{ items.name }}</view>
+    <view class="remark">{{ items.unit }}</view>
+    <view class="price">
+      <text style="float: left;">¥{{ items.price }}</text>
+      <text style="float: right; margin-right: 0.75rem;">x{{ items.count }}</text>
+    </view>
+  </view>
+
+  <view class="total">共
+    <text>{{ item.count }}</text>件商品，合计
+    <text>￥{{ item.price }}</text>（含运费¥0.00）</view>
+</navigator>
+
+<!-- 待付款 -->
+<view class="operation weui-cell" wx:if="{{ item.status=='待付款' }}">
+  <view class="weui-cell__bd"></view>
+  <view class="weui-cell__ft" bindtap='orderAction' data-type="ordercancle" data-url="order_detail?order_id={{ item.id }}&cancle=true">取消订单</view>
+  <view class="weui-cell__ft" bindtap='orderAction' data-type="orderpay" data-url="order_detail?order_id={{ item.id }}&pay_now=true">去付款</view>
+</view>
+
+<!-- 待发货 -->
+ <view class="operation weui-cell" wx:if="{{ item.status=='待发货' }}">
+  <view class="weui-cell__bd"></view>
+  <navigator class="weui-cell__ft" bindtap='orderAction' data-type="ordercancle" data-url="order_detail?order_id={{ item.id }}&cancle=true">取消订单</navigator>
+</view> 
+
+<!-- 待收货 -->
+ <view class="operation weui-cell" wx:if="{{ item.status=='待收货' }}">
+  <view class="weui-cell__bd"></view>
+  <view class="weui-cell__ft" onclick="">确认收货</view>
+</view> 
+
+</block>
+<view id="loading-tips" style="padding: 15px; color: #999; font-size: 14px; margin:0 auto;text-align: center;" wx:if="{{ whetherShowMore }}">别再扯了，已经没有了</view>
+</scroll-view>

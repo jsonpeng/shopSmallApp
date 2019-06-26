@@ -1,0 +1,2 @@
+/* pages/category/categoty.wxss */
+.weui-grids.index-function-grids .weui-grid{width: 25%;border-top:0;border-left: 0;}

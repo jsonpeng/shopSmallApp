@@ -1,0 +1,24 @@
+<!--pages/kefu/kefu.wxml-->
+<view class="weui_planel_item shareCode">
+  <view class="weui-media-box">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <image class="" src="../../images/bank1.png" alt=""></image>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="ft-l">售前客服：叮咚</view>
+        <view class="ft-s">扫描或长按二维码联系客服</view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-media-box cut_line">
+    <view class="border"></view>
+    <view class="weui-cell-fl"></view>
+    <view class="weui-cell-fr"></view>
+  </view>
+  <view class="weui-media-box QRcode">
+    <view class="QRimg">
+      <image src="{!! $item->qr_code !!}" alt=""></image>
+    </view>
+  </view>
+</view>

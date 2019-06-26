@@ -1,0 +1,4 @@
+/* pages/myself/collections.wxss */
+.weui-cell_swiped>.weui-cell__ft{position: absolute;right:-87.5px;top: 0;bottom: 0;color: #fff;}
+.delete-swipeout{background-color: red;}
+.collect{overflow-x: hidden;}

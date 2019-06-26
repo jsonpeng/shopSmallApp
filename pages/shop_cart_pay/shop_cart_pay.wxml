@@ -1,0 +1,210 @@
+<!--pages/shop_cart_pay/shop_cart_pay.wxml-->
+  <view id="check">
+    <view class="user-address" wx:if="{{ addressList.length!=0 || address !='' }}">
+      <image src="../../images/default/location.png" class="address-icon"></image>
+      <view class="address-content">
+        <view class="name">{{ address.name }}</view>
+        <view class="address">{{ address.detail }}</view>
+      </view>
+      <view class="select" bindtap='edit_to' style='color:{{maincolor}};border-color:{{maincolor}}'>修改</view>
+    </view>
+    <view class="postline">
+    </view>
+ 
+  <block wx:for="{{ shopCartList }}" wx:key="item" wx:for-index="index">
+  <!--不带规格的商品-->
+    <view class="check-products" wx:if="{{ item.types==0 && item.selected }}">
+      <view class="zcjy-product-check">
+        <image src="{{ item.product.image }}" class="productImage"></image>
+        <view class="product-name">{{ item.name }}</view>
+        <view class="remark">¥{{ item.price }}</view>
+        <view class="price">
+          <text style="" class="ft-l">¥{{ item.price }}</text>
+          <text style="float: right; margin-right: 0.75rem;" class="ft-r">x{{ item.qty }}</text>
+        </view>
+      </view>
+    </view>
+
+    <!--带规格的商品-->
+    <view class="check-products" wx:if="{{ item.types==1 && item.selected }}">
+      <view class="zcjy-product-check">
+        <image src="{{ item.spec.image }}" class="productImage"></image>
+        <view class="product-name">{{ item.name }}</view>
+        <view class="remark">规格：{{ item.spec.key_name }}</view>
+        <view class="price">
+          <text style="" class="ft-l">¥{{ item.price }}</text>
+          <text style="float: right; margin-right: 0.75rem;" class="ft-r">x{{ item.qty }}</text>
+        </view>
+      </view>
+    </view>
+
+  </block>
+
+    <view class="page__bd section-margin" wx:if="{{ switch.FUNC_MEMBER_LEVEL == true && myself.userLevel.discount < 100 }}">
+      <view class="weui-form-preview">
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label" style="color: #333;">{{ myself.userLevel.name }}</label>
+             <em class="weui-form-preview__value ">{{ myself.userLevel.discount }}折优惠</em> 
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="weui-cells section-margin" bindtap='chooseCoupon' data-type='getCoupon' wx:if="{{ switch.FUNC_COUPON == true }}">
+      <view class="weui-cell weui-cell_access" >
+        <view class="weui-cell__bd">
+          <view id="coupon_name">优惠券<text wx:if="{{ couponUse }}">({{ coupon_text }})</text></view>
+        </view>
+        <view class="weui-cell__ft">
+        </view>
+      </view>
+    </view>
+    <!-- 优惠券 -->
+    
+    <view class="page__bd section-margin" wx:if="{{ switch.FUNC_CREDITS == true && myself.user.credits }}">
+      <view class="weui-form-preview">
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label" style="color: #333;">积分抵扣({{ myself.user.credits }}积分)</label>
+            <em class="weui-form-preview__value price_final credit_money"></em>
+          </view>
+        </view>
+        <view class="weui-form-preview__bd">
+
+              <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label">使用</label>
+              </view>
+
+              <view class="counter">
+                  <i class="fa fa-minus" style="float:left;" bindtap="creadits_del"></i>
+                  <input type="number" name="count" value="{{ use_credits }}" bindinput='creadits_input' />
+                  <i class="fa fa-plus" style="float:left;" bindtap="creadits_add"></i>
+              </view>
+
+            <view class="weui-form-preview__item">
+              <label class="weui-form-preview__label">使用积分(本次最多可用{{ max_credits }} {{ credits_alias }})</label>
+            </view>
+
+        </view>
+      </view>
+    </view>
+
+ 
+
+   
+
+    
+    <view class="page__bd section-margin" wx:if="{{ switch.FUNC_FUNDS == true && myself.user.user_money }}">
+      <view class="weui-form-preview">
+        <view class="weui-form-preview__hd">
+            <view class="weui-form-preview__item">
+                <label class="weui-form-preview__label" style="color: #333;">账户余额({{ myself.user.user_money }}元)</label>
+            </view>
+        </view>
+        <view class="weui-form-preview__bd">
+            <view class="weui-form-preview__item">
+              <label class="weui-form-preview__label">使用</label>
+              <view>
+                <view class="counter">
+                  <i class="fa fa-minus" style="float:left;" bindtap="user_del"></i>
+                  <input type="number" name="user_money" bindinput='user_input' value="{{ use_user_money }}"  />
+                  <i class="fa fa-plus" style="float:left;" bindtap="user_add"></i>
+                </view>
+                <view bindtap='userAllMoney' >全部使用</view>
+              </view>
+            </view>
+          
+        </view>
+      </view>
+    </view>
+ 
+
+
+    <view class="page__bd section-margin">
+      <view class="weui-form-preview">
+        <view class="weui-form-preview__hd">
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label" style="color: #333;">付款金额</label>
+            <em class="weui-form-preview__value price_final">¥
+              <text>{{ needMoney  }}</text>
+            </em>
+          </view>
+        </view>
+
+        <view class="weui-form-preview__bd">
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">商品总金额</label>
+            <text class="weui-form-preview__value"> {{ allCount }}</text>
+          </view>
+
+          <view class="weui-form-preview__item" wx:if="{{ switch.FUNC_FUNDS == true && myself.user.user_money > 0 }}">
+            <label class="weui-form-preview__label">使用余额</label>
+            <text class="weui-form-preview__value" id="yue_preference">{{ use_user_money > 0 ? '-'+use_user_money : use_user_money }}</text>
+          </view>
+
+          <view class="weui-form-preview__item" wx:if="{{ switch.FUNC_ORDER_PROMP == true && cart.order_promp_money > 0 }}">
+            <label class="weui-form-preview__label">订单优惠({{ cart.order_promp }})</label>
+            <text class="weui-form-preview__value" id="yue_preference">-{{ cart.order_promp_money }}</text>
+          </view>
+                 
+       
+          <view class="weui-form-preview__item" wx:if="{{ switch.FUNC_COUPON == true }}">
+            <label class="weui-form-preview__label">优惠券减免</label>
+            <text class="weui-form-preview__value" id="coupon_preference">{{ couponPrice==0?couponPrice:'-'+couponPrice}}</text>
+          </view>
+
+          <view class="weui-form-preview__item" wx:if="{{ switch.FUNC_CREDITS == true && myself.user.credits > 0 }}">
+            <label class="weui-form-preview__label">积分抵扣</label>
+            <text class="weui-form-preview__value credit_money" id="credit_preference">{{ creditMoney }}</text>
+          </view>
+
+
+          <view class="weui-form-preview__item">
+            <label class="weui-form-preview__label">运费</label>
+            <text class="weui-form-preview__value" id="freight">{{ cart.freight }}</text>
+          </view>
+        </view>
+
+      </view>
+      <view class="vux-x-textarea section-margin">
+        <view class="remark">备注信息</view>
+        <view class="weui-cell__bd">
+          <textarea autocomplete="off" bindinput='remarkInputSave' autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="" rows="3" cols="30" maxlength="200" class="weui-textarea" name="remark" value="{{ inputs.remark }}" />
+          <!-- <view class="weui-textarea-counter">
+            <text>0</text>/200</view> -->
+        </view>
+      </view>
+    </view>
+  </view>
+
+
+<view>
+  <view class="weui-mask" id="iosMask" style='height:100%;' wx:if="{{ couponStatus }}" bindtap='chooseCoupon'></view>
+  <view class="weui-actionsheet" id="iosActionsheet" wx:if="{{ couponStatus }}">
+    <view class="weui-actionsheet__title">
+      <view class="weui-actionsheet__title-text">请选择优惠券</view>
+    </view>
+    <view class="weui-actionsheet__menu">
+        <block wx:for="{{ coupons }}" wx:for-item="item" wx:key="key" wx:for-index="index" >
+        <view class='weui-actionsheet__cell coupon-cell' bindtap='useCoupon' data-id="{{ item.id }}" data-price="{{ item.coupon.given }}" data-text="满{{ item.coupon.base }}减{{ item.coupon.given }}">
+            <view class='price'>{{ item.coupon.given }}元</view>
+            <view class='des'>满{{ item.coupon.base }}可用</view>
+            <view class='time-range'>使用有效期{{ item.time_begin }}--{{ item.time_end }}</view>
+            <view class='usecoupon'>使用</view>
+        </view>
+        </block>
+    </view>
+    <view class="weui-actionsheet__action">
+      <view class="weui-actionsheet__cell" id="iosActionsheetCancel" bindtap='chooseCoupon' >取消</view>
+    </view>
+  </view>
+</view>
+<view class="checkwrapper product-checker">
+  <text style="margin-left: 0.75rem; font-size:14px;">实付款： </text>
+  <view class="price_final" id="total"> ¥
+    <text>{{ needMoney }}</text>
+  </view>
+  <!-- <navigator class="right-botton02" open-type="switchTab" url='../cat/cat'>继续购物</navigator> -->
+  <view class="right-botton01" href="javascript:;" bindtap="payNow" style='background:{{maincolor}}'>立即支付</view>
+</view>

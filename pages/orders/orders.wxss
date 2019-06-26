@@ -1,0 +1,6 @@
+/* pages/orders/orders.wxss */
+.navbar{display: flex;line-height: 50px;background-color: #fff;}
+.navbar .item{flex: 1;text-align: center;}
+.navbar .item text{font-size:16px;}
+.navbar .active{color: #ff4a44;}
+.navbar .active text{display: inline-block;border-bottom:1px solid #ff4a44;}

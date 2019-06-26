@@ -1,0 +1,21 @@
+<!--pages/brands/brands.wxml-->
+<view class="yishu-index-swiper">
+  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular="{{circular}}">
+    <block wx:for="{{imgUrls}}" wx:key="item">
+      <swiper-item>
+        <image src="{{item}}" mode="widthFix" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+
+<view class="weui-grids">
+  <block wx:for="{{ brands }}" wx:key="key" wx:for-item="item">
+    <navigator url="../brands/list?brand_id={{ item.id }}" class="weui-grid">
+      <view class="weui-grid__icon">
+        <image src="{{ item.image }}" alt=""></image>
+      </view>
+      <view class="weui-grid__label">{{ item.name }}</view>
+    </navigator>
+  </block>
+</view>

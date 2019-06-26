@@ -1,0 +1,53 @@
+<!--pages/withdrawal/apply.wxml-->
+<view class="withdraw-sum weui-cells">
+  <view class="weui-cell weui-cell_access withdraw-bank withdraw-bank-one">
+    <view class="weui-cell__hd ">
+      <image url="../../images/bank1.png" alt=""></image>
+    </view>
+    <view class="weui-cell__bd">
+      <view class="ft-l">工商银行</view>
+      <view class="ft-s">储蓄卡</view>
+    </view>
+    <view class="weui-cell__ft"></view>
+  </view>
+
+  <view class="weui-cell">
+    <view class="intr">提现金额
+      <text> ( 提现最低<text id="min_price">2000</text>元起，每日限额3笔 ) </text>:
+    </view>
+  </view>
+  <view class="weui-cell">
+    <view class="money-num weui-cell__bd">
+      <text>¥</text><input type="text" name="bank_money_num" />
+    </view>
+  </view>
+  <view class="weui-cell withdraw-apply-info">
+    <view class="weui-cell__hd">可用余额：
+      <text id="can_use_money">1000000</text>元</view>
+    <view class="weui-cell__bd" id="all_with_draw">全部提现</view>
+  </view>
+  <view class="page__bd page__bd_spacing">
+    <navigator url="javascript:;" class="weui-btn" id="enterWithDraw" data-bankid="@if(!empty($first_card)){!! $first_card->id !!}@endif">确认提现</navigator>
+  </view>
+</view>
+
+<view id="all_bank_list" style="display: none;">
+  <view class="withdraw-sum weui-cells">
+    <view class="weui-cell  withdraw-bank withdraw-bank-list" onclick="chooseOne(this)" data-id="{!! $item->id !!}">
+      <view class="weui-cell__hd ">
+        <image url="../../images/bank.png" alt=""></image>
+      </view>
+      <view class="weui-cell__bd">
+        <view class="ft-l">{!! $item->name !!}</view>
+        <view class="ft-s">{!! $item->subcardno !!} {!! $item->cardType !!}</view>
+      </view>
+      <view class="weui-cell__ft">
+        <text class="weui-icon-success-no-circle" style="display: none"></text>
+      </view>
+    </view>
+
+    <view class="page__bd page__bd_spacing">
+      <navigator href="/usercenter/bankcards/add" class="weui-btn">+添加新卡片</navigator>
+    </view>
+  </view>
+</view>

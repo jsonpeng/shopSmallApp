@@ -1,0 +1,33 @@
+/* pages/product/product.wxss */
+/* 
+.chooseDimension .buynow {
+  width: 100%;
+}
+.chooseDimension .addcart {
+  display: none;
+} */
+ /* .item-mask{display: none;}  */
+ /* .ds-in-bl.search text{padding:10px  30px;} */
+ page{padding-top: 45px;min-height:100%;}
+ .chooseDimension .buynow::after{border: none;outline: none;}
+ button::after{border: none;}
+ .swiper-box{ display: block; height: 100%; width: 100%; overflow: hidden; } 
+  .yishu-index-swiper swiper{min-height: 375px;}
+ .yishu-index-swiper image{width: 100%;display: block;}
+.checkwrapper button{-webkit-appearance: none;background-color: #fff;}
+.switcher{display: flex;}
+.intro,.paras{width: 50%;text-align: center;font-size:14px;border-left: 1px solid #e5e5e5;line-height: 35px;}
+.show{display: block;}
+.hidden{display: none; }
+#product_detail .product-title{display: flex;align-items:center;}
+#product_detail .product-title .dotted-line{position:absolute;right:45px;top:0.375rem;}
+button.checker-left-item{margin-left: 0;}
+.product-intro image{display: block;}
+/* social主题底部按钮样式 */
+.social.checkwrapper{display: flex;}
+.social .checker-left-item{flex: 1;}
+.social .checker-left-item image{width:25px;height: 25px;}
+.social .right-botton01{flex: 2;position: relative;}
+
+/* 分享弹出页面 */
+ .share-code .share-content{background-image: url(https://shop-model.yunlike.cn/images/share-prod.png);background-repeat: no-repeat;background-position:center;background-size:100% 100%;padding:10px 0  20px 0;} 

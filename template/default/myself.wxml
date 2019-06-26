@@ -1,0 +1,162 @@
+<import src="../../template/common/tabbar.wxml"  />
+
+<template name="default">
+
+  <view class="userInfo">
+    <image class="bg" src="../../images/default/usercenter.jpg" mode='widthFix' alt=""></image>
+
+    <view class="userImg">
+      <image src="{{ myself.user.head_image }}" alt=""></image>
+    </view>
+    <view class="menber" wx:if="{{ switch.FUNC_MEMBER_LEVEL == true  }}">
+      <image src="../../images/vip.png" alt=""></image>
+      <text>尊敬的</text>
+      <text>{{ myself.userLevel.name }}</text>
+    </view>
+    <view class="name">
+      {{ myself.user.nickname }}
+    </view>
+  </view>
+  <view class="weui-cells section-margin">
+    <navigator class="weui-cell weui-cell_access" url="../orders/orders" hover-class='none'>
+      <view class="weui-cell__bd">
+        <text>我的订单</text>
+      </view>
+      <view class="weui-cell__ft">查看全部订单</view>
+    </navigator>
+    <view class="weui-grids index-function-grids">
+      <navigator url="../orders/orders?order_id=2" class="weui-grid">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center1.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">待付款</text>
+      </navigator>
+      <navigator url="../orders/orders?order_id=3" class="weui-grid">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center2.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">待发货</text>
+      </navigator>
+      <navigator url="../orders/orders?order_id=4" class="weui-grid">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center3.png" alt=""></image>
+        </view>
+        <view class="weui-grid__label">待收货</view>
+      </navigator>
+      <navigator url="../orders/orders?order_id=5" class="weui-grid">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/done.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">已完成</text>
+      </navigator>
+      <!-- <navigator url="/refunds" class="weui-grid">
+      <view class="weui-grid__icon">
+        <image src="../../images/default/center5.png" alt=""></image>
+      </view>
+      <text class="weui-grid__label">售后</text>
+    </navigator> -->
+      <navigator url="../team_sale/team" class="weui-grid" wx:if="{{ teamsale_switch==true }}">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center6.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">拼单记录</text>
+      </navigator>
+    </view>
+  </view>
+
+  <view class="weui-cells section-margin">
+    <view class="weui-cell  weui-cells__title">
+      <view class="weui-cell__bd">
+        <text>账户</text>
+      </view>
+      <view class="weui-cell__ft"></view>
+    </view>
+    <view class="weui-grids index-function-grids">
+      <navigator url="../myself/credits" class="weui-grid" wx:if="{{ switch.FUNC_CREDITS == true }}">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center7.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">积分{{ myself.user.credits }}</text>
+      </navigator>
+      <navigator url="../myself/blances" class="weui-grid" wx:if="{{ switch.FUNC_FUNDS == true }}">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center8.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">余额{{ myself.user.user_money }}</text>
+      </navigator>
+      <!-- <navigator url="../withdrawal/withdrawal" class="weui-grid">
+      <view class="weui-grid__icon">
+        <image src="../../images/default/center9.png" alt=""></image>
+      </view>
+      <text class="weui-grid__label">提现</text>
+    </navigator> -->
+      <navigator url="../coupon/coupon" class="weui-grid" wx:if="{{ switch.FUNC_COUPON == true }}">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center10.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">优惠券</text>
+      </navigator>
+      <navigator url="../myself/collections" class="weui-grid"  wx:if="{{ switch.FUNC_COLLECT == true }}">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center11.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">收藏</text>
+      </navigator>
+      <view data-url="../address/address" bindtap='redirectUrl' class="weui-grid">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center12.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">地址管理</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="weui-cells section-margin" wx:if="{{ switch.FUNC_DISTRIBUTION == true && myself.user.is_distribute }}">
+    <view class="weui-cell  weui-cells__title">
+      <view class="weui-cell__bd">
+        <text>合伙人</text>
+      </view>
+      <view class="weui-cell__ft"></view>
+    </view>
+    <view class="weui-grids index-function-grids">
+      <navigator url="../myself/fellow" class="weui-grid">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center13.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">推荐<!--{{ $user->level1 + $user->level2 + $user->level3 }} -->人</text>
+      </navigator>
+      <!-- <navigator url="../bankcards/bankcards" class="weui-grid">
+      <view class="weui-grid__icon">
+        <image src="../../images/default/center14.png" alt=""></image>
+      </view>
+      <text class="weui-grid__label">银行卡</text>
+    </navigator> -->
+      <navigator url="../myself/bonus" class="weui-grid">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center15.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">分佣记录</text>
+      </navigator>
+
+      <navigator url="../myself/qrcode" class="weui-grid">
+        <view class="weui-grid__icon">
+          <image src="../../images/default/center16.png" alt=""></image>
+        </view>
+        <text class="weui-grid__label">分享二维码</text>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- 清理缓存 -->
+    <view class="weui-cells section-margin">
+    <view class="weui-cell  weui-cells__title">
+      <view class="weui-cell__bd" bindtap='clearCache'>
+        <text>清理缓存</text>
+      </view>
+      <view class="weui-cell__ft"></view>
+    </view>
+    </view>
+
+<template is="tabBar" data="{{ tabBar:tabBar }}"></template>
+
+</template>

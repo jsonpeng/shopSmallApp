@@ -1,0 +1,7 @@
+/* pages/kefu/kefu.wxss */
+page{background-color:#84d4da;}
+.shareCode .weui-cell image{width:37px;height: 37px;}
+.QRcode .QRimg image{width: 127px;height: 127px;}
+
+.shareCode .weui-cell__bd .ft-l{font-size: 14px;text-align:left;}
+.shareCode .weui-cell__bd .ft-s{font-size: 12px;color: #a8a8a8;text-align: left;}

@@ -1,0 +1,4 @@
+@import "../../app.wxss";
+.zcjy-product-cart .productImage image{width: 85px;height: 85px;}
+.shopCart{padding-bottom: 51px;} 
+.empty .checkwrapper,.shopCart .checkwrapper{bottom:51px;} 

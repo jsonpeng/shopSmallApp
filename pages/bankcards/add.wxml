@@ -1,0 +1,73 @@
+<!--pages/bankcards/add.wxml-->
+
+<form>
+  <view class="weui-cells weui-cells_form">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">银行卡名称</label>
+      </view>
+      <view class="weui-cell__bd">
+        <view class=" pl0" name="name">
+          <picker bindchange="bindPickerChange" value="{{index}}" range="{{banks}}">
+            <view class="picker">
+              :{{banks[index]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">银行卡类型</label>
+      </view>
+      <view class="weui-cell__bd">
+        <view class=" pl0" name="name">
+          <picker bindchange="bindChange" value="{{index}}" range="{{types}}">
+            <view class="picker">
+              :{{types[index]}}
+            </view>
+          </picker>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">支行</label>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" type="text" placeholder="支行" name="bank_name" maxlength="100" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">用户名</label>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" type="text" placeholder="用户名" name="user_name" maxlength="16" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">账号</label>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" type="text" placeholder="账号" name="count" maxlength="128" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">短信提醒手机号</label>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" type="text" placeholder="短信提醒手机号" name="mobile" maxlength="128" />
+      </view>
+    </view>
+  </view>
+
+  <view class="page">
+    <view class="page__bd page__bd_spacing">
+      <text class="weui-btn weui-btn_primary" type="button" onclick="saveForm()">保存</text>
+      <navigator href="javascript:history.back(-1)" class="weui-btn weui-btn_default">返回</navigator>
+    </view>
+  </view>
+</form>

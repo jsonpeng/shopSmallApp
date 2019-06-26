@@ -1,0 +1,87 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/myself/myself",
+    "pages/cat/cat",
+    "pages/shop_cart/shop_cart",
+    "pages/shop_cart_pay/shop_cart_pay",
+    "pages/category/categoty",
+    "pages/product/product",
+    "pages/coupon/coupon",
+    "pages/flash_sale/flash_sale",
+    "pages/brands/brands",
+    "pages/brands/list",
+    "pages/product_promp/product_promp",
+    "pages/orders/orders",
+    "pages/team_sale/team_sale",
+    "pages/bankcards/bankcards",
+    "pages/bankcards/add",
+    "pages/myself/credits",
+    "pages/myself/blances",
+    "pages/myself/collections",
+    "pages/address/address",
+    "pages/myself/fellow",
+    "pages/myself/bonus",
+    "pages/myself/qrcode",
+    "pages/withdrawal/withdrawal",
+    "pages/withdrawal/apply",
+    "pages/product_promp/list",
+    "pages/address/action",
+    "pages/orders/order_detail",
+    "pages/team_sale/team_share",
+    "pages/team_sale/team",
+    "pages/kefu/kefu",
+    "pages/found/found",
+    "pages/store/index",
+    "pages/test/test",
+    "pages/webview/webview",
+    "pages/product_of_type/product_of_type",
+    "pages/country_type/country_type",
+    "pages/news/news",
+    "pages/shopinfo/shopinfo"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "",
+    "navigationBarTextStyle": "black",
+    "onReachBottomDistance": 0
+
+  },
+  "tabBar": {
+    "color": "#999",
+    "selectedColor": "#ff4e44",
+    "borderStyle": "white",
+    "backgroundColor": "#f9f9f9",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "active": false
+      },
+      {
+        "pagePath": "pages/found/found",
+        "active": false
+      },
+      {
+        "pagePath": "pages/cat/cat",
+        "active": false
+      },
+      {
+        "pagePath": "pages/shop_cart/shop_cart",
+        "active": false
+      },
+      {
+        "pagePath": "pages/myself/myself",
+        "active": false
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "connectSocket": 20000,
+    "uploadFile": 20000,
+    "downloadFile": 20000
+  },
+  "onReachBottomDistance": 800
+}

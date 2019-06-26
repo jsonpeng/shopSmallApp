@@ -1,0 +1,13 @@
+<!--pages/product_promp/list.wxml-->
+<import src="../../template/common/list.wxml"  />
+<import src="../../template/common/img-loader/img-loader.wxml"/>
+
+<view class="product-wrapper">
+  <block wx:for="{{ product_proms_list }}"  wx:key="item">
+      <template is="product_proms_list" data="{{ item }}"> </template>
+  </block>
+</view>
+
+ <view id="loading-tips" style="padding: 15px; color: #999; font-size: 14px; margin:0 auto;text-align: center;" wx:if="{{ themeData.whetherShowMore }}">别再扯了，我是有底线的</view>
+
+<template is="img-loader" data="{{ imgLoadList }}"></template>

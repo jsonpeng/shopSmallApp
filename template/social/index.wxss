@@ -1,0 +1,7 @@
+@import "../../app.wxss";
+page {
+  background-color: red;
+}
+.weui-cell {
+  border-bottom: 1px solid #eee;
+}

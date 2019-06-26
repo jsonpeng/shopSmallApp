@@ -1,0 +1,88 @@
+<!--pages/address/add.wxml-->
+  <view class="weui-cells weui-cells_form">
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">收件人</label>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" type="text" bindinput="saveName" placeholder="收件人" value="{{ name }}" name="user_name" maxlength="16" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">电话</label>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" type="text" bindinput="savePhone" placeholder="电话" value="{{ phone }}" name="user_phone" maxlength="16" />
+      </view>
+    </view>
+    <view class="weui-cell  weui-cell_access">
+      <view class="weui-cell__hd">
+        <label class="weui-label">省</label>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="bindChange" value="{{ provincesIndexType }}" range="{{ provinces }}" data-types="provinces">
+
+          <view class="picker">
+            {{ provinces[provincesIndexType] }}
+          </view>
+
+        </picker>
+      </view>
+      <view class='weui-cell__ft'></view>
+    </view>
+    <view class="weui-cell weui-cell_access">
+      <view class="weui-cell__hd">
+        <label class="weui-label">市</label>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="bindChange" value="{{ citiesIndexType }}" range="{{ cities }}" data-types="cities">
+          <view class="picker">
+            {{ cities[citiesIndexType] }}
+          </view>
+        </picker>
+      </view>
+      <view class='weui-cell__ft'></view>
+    </view>
+    <view class="weui-cell weui-cell_access">
+      <view class="weui-cell__hd">
+        <label class="weui-label">区</label>
+      </view>
+      <view class="weui-cell__bd">
+        <picker bindchange="bindChange" value="{{ districtsIndexType }}" range="{{ districts }}" data-types="districts">
+          <view class="picker">
+            {{ districts[districtsIndexType] }}
+          </view>
+        </picker>
+      </view>
+      <view class='weui-cell__ft'></view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd">
+        <label class="weui-label">详细收货地址</label>
+      </view>
+      <view class="weui-cell__bd">
+        <input class="weui-input" type="text" bindinput="saveAddress" value="{{ detail }}" placeholder="详细地址" name="user_name" maxlength="16" />
+      </view>
+    </view>
+    <view class="weui-cell">
+      <view class="weui-cell__hd" >
+        <label class="weui-label">默认收货地址</label>
+      </view>
+      <view class="weui-cell__bd" style='text-align:right;'>
+        <switch bindchange="switchChange" checked="{{ default }}" color='{{maincolor}}'/>
+      </view>
+    </view>
+  </view>
+
+  <view class="page">
+    <view class="page__bd page__bd_spacing">
+      <text class="weui-btn weui-btn_primary" type="button" bindtap='saveForm' style='background:{{maincolor}}' >保存</text>
+      <navigator  class="weui-btn weui-btn_default" bindtap='back'>返回</navigator>
+    </view>
+  </view>
+
+
+<loading hidden="{{hidden}}" bindchange="loadingChange">
+    加载中...
+  </loading> 

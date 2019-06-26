@@ -1,0 +1,51 @@
+<!--pages/address/address.wxml-->
+
+
+
+<block wx:for="{{ addressList }}" wx:key="item" wx:for-index="index">
+      <!--结算时的地址选择-->
+      <view data-id="{{  item.id }}" bindtap='checknowChoose' wx:if="{{ checknow }}">
+      <view class="weui-panel__bd" style='margin-bottom:5px;' >
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title">{{ item.name }} {{ item.phone }}</view>
+          <view class="weui-media-box__desc">{{ item.detail }}</view>
+        </view>
+      </view>
+      </view>
+
+      <view data-id="{{  item.id }}" wx:if="{{ !checknow }}">
+      <navigator class="weui-panel__bd" url="../address/action?id={{ item.id }}">
+        <view class="weui-media-box weui-media-box_text">
+          <view class="weui-media-box__title">{{ item.name }} {{ item.phone }}</view>
+          <view class="weui-media-box__desc">{{ item.detail }}</view>
+        </view>
+      </navigator>
+      <view class="weui-cell addressAmend" data-id="1">
+        <view class="weui-cell__bd address_items" data-id="{{ item.id }}" >
+            <icon wx:if="{{ item.default=='true' || item.default== true }}" type="success" data-status="true" bindtap='defaultAddress' data-id="{{ item.id }}" color="{{maincolor}}" size="20"/>  <text wx:if="{{ item.default =='false' || !item.default }}" data-id="{{ item.id }}" class='circle' bindtap='defaultAddress' data-status="false" style='display:inline-block;box-sizing:border-box;width:20px;height:20px;border-radius:50%;border:1px solid #eee; vertical-align:middle;'></text> 默认收货地址
+        </view>
+        <view class="weui-cell__ft">
+          <navigator url="../address/action?id={{ item.id }}">
+            <image src="../../images/redact.png" alt=""></image>编辑
+          </navigator>
+          <view bindtap='delAddress' class='delete' data-id="{{ item.id }}" data-index="{{ index }}">
+            <image src="../../images/dustbin.png" alt=""></image> 删除
+          </view>
+        </view>
+      </view>
+      </view>
+</block>
+    <!--结算时的地址选择-->
+  <view class="page" wx:if="{{ checknow }}">
+    <view class="page__bd page__bd_spacing" >
+      <navigator class="weui-btn weui-btn_primary" url="action?checknow=true" style='background:{{maincolor}}' >使用新收货地址</navigator>
+      <navigator  class="weui-btn weui-btn_default" url="../shop_cart_pay/shop_cart_pay">返回</navigator>
+    </view>
+  </view>
+
+<!-- 添加地址按钮 -->
+<view class="page weui-btn-bottom"  wx:if="{{ !checknow }}">
+  <view class="page__bd page__bd_spacing">
+    <navigator url="action" class="weui-btn weui-btn_primary" style='background:{{maincolor}}' >+ 添加收货地址</navigator>
+  </view>
+</view>

@@ -1,0 +1,13 @@
+@import "../../common/weui.wxss";
+@import "../../app.wxss";
+page{padding-bottom: 59px;}
+.weui-grid{width: 25%;border-right: 0;border-bottom: 0;}
+.weui-grids{border-left:0;}
+image{width: 100%;height: 100%;}
+.menber image{width: 16px;height: 13px;margin-right:5px;}
+.menber text{color: #fff;font-size: 12px;}
+.weui-cells.section-margin{margin-top:-8px;margin-bottom:5px;}
+.weui-cells__title{color: #333;margin-bottom: 0;}
+.user-zone .weui-cell{border-bottom: 1px solid #e0e0e0;}
+.weui-cells.user-zone{margin-top:0;}
+ .share-code .share-content{background-image: url(https://shop-model.yunlike.cn/images/share-code.png);background-repeat: no-repeat;background-position:center;background-size:100% 100%;padding:10px 0  20px 0;} 

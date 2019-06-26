@@ -1,0 +1,7 @@
+<import src="../../wxParse/wxParse.wxml" />
+
+<view class="post-title">{{page.name}}</view>
+<!-- <view class="post-sub-title">{{name}}发表于 <text> {{page.currentTime}}</text></view> -->
+<view class="post-content">
+  <template is="wxParse" data="{{ wxParseData:contents.nodes  }}" />
+</view>

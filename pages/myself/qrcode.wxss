@@ -1,0 +1,12 @@
+/* pages/myself/qrcode.wxss */
+.shareCode{margin-top: 15px;}
+.shareCode .name{font-size: 16px;}
+page{background-color:#84d4da;}
+.QRimg image{height: 127px;}
+.QRcode .text{font-size:16px;}
+.smll-pic{display: inline-block;}
+.smll-pic image{display:inline-block;height: 32px;width: 32px;}
+.store-info view,.store-info navigator{display: inline-block;color: #fff;padding: 0 2px;font-size: 14px;}
+.store-text image{height: 15px;display: inline-block;}
+.store-text navigator{display:inline-block;}
+.store-text .weui-planel__bd,.store-text .weui-planel__bd text{font-size:12px;color:#fff;}

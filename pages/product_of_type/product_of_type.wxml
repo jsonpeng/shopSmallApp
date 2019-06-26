@@ -1,0 +1,13 @@
+<!--pages/product_of_type/product_of_type.wxml-->
+<import src="../../template/common/list.wxml" />
+<import src="../../template/common/img-loader/img-loader.wxml"/>
+
+<view class="product-wrapper more-goods scroll-container">
+
+  <block wx:for="{{ type==1? themeData.newProduct : themeData.sales_count_products }}" wx:key="item">
+    <template is="product_list_social" data="{{ item }}"> </template>
+  </block>
+
+</view>
+ <view id="loading-tips" style="padding: 15px; color: #999; font-size: 14px; margin:0 auto;text-align: center;" wx:if="{{ themeData.whetherShowMore }}">别再扯了，我是有底线的</view>
+<template is="img-loader" data="{{ imgLoadList }}"></template>

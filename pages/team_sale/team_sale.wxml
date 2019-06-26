@@ -1,0 +1,15 @@
+<import src="../../template/common/list.wxml"  />
+<view class='product-wrapper' style='padding: 5px 0px; justify-content: space-between;'>
+  <block wx:for="{{ team_sale_product }}" wx:key="item">
+   <navigator class="product-item3" url="../product/product?product_id={{ item.product_id }}" hover-class='none'>
+    <!-- <view class="product-item3"> -->
+      <view class="img">
+        <image src="{{ item.share_img }}"></image>
+      </view>
+      <view class="title">{{ item.product_name }}</view>
+      <view class="price">¥{{ item.price }}
+        <text class="cross">已拼{{ item.sales_sum }}件</text>
+      </view>
+    </navigator>
+  </block>
+</view>

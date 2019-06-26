@@ -1,0 +1,17 @@
+.type-nav{
+	position: relative;
+  padding:.7rem .65rem;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	z-index: 10;
+  display:flex;
+  background-color:rgb(238,238,238);
+}
+.type-nav.selected{
+	margin-right: -1px;
+	padding-left:-1px;
+	color: rgb(143,195,32);
+	background-color: #fff;
+}
+.slide-box.nav-scroll .slide-item{color:#000;}
+.slide-box.nav-scroll .active{color: #ff4e44;}

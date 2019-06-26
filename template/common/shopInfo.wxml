@@ -1,0 +1,22 @@
+<template name="shopInfo">
+  <view class="weui-planel ">
+    <view class="weui-panel__hd store-info">
+      <block wx:for="{{ pagelist }}" wx:key="item" wx:for-index="index">
+        <view>
+          <navigator url="../shopinfo/shopinfo?slug={{ item.slug }}">{{ item.name }}</navigator>
+        </view>
+        <view>|</view>
+      </block>
+
+      <navigator url="../myself/myself"  open-type="switchTab" style='display:inline-block;'>会员中心</navigator>
+    </view>
+  </view>
+  <view class="weui-planel store-text">
+    <view class="weui-planel__hd">
+      <view class="storeName" style='font-size:14px;color:#999'>{{ pagelist[0]['site_name'] }}</view>
+    </view>
+    <view class="weui-planel__bd" bindtap="takeCall">
+      <text>芸来软件提供技术支持 tel:13971217270</text>
+    </view>
+  </view>
+</template>

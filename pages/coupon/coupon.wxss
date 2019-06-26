@@ -1,0 +1,5 @@
+/* pages/coupon/coupon.wxss */
+page{padding-bottom: 10px;}
+.weui-media-box_bd text{display: block;}
+.weui-navbar__item{padding: 0;height: 50px;line-height: 50px;}
+.weui-navbar__item.weui-bar__item_on text{border-bottom: 1px solid #ff4e44;}

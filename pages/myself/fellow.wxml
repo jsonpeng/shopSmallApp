@@ -1,0 +1,10 @@
+<!--pages/myself/fellow.wxml-->
+<block wx:for="{{ parterners }}" wx:key="key" wx:for-item="item">
+<view class="weui-cell partner">
+  <view class="weui-cell__hd partner-img">
+    <image src="{{item.head_image}}" alt=""></image>
+  </view>
+  <view class="weui-cell__bd partner-name">{{ item.nickname }}</view>
+  <view class="weui-cell__ft join-time">加入时间：{{ item.created_at }}</view>
+</view>
+</block>

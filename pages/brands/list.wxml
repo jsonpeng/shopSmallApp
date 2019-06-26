@@ -1,0 +1,11 @@
+<!--pages/brands/list.wxml-->
+<import src="../../template/common/list.wxml"  />
+<import src="../../template/common/img-loader/img-loader.wxml"/>
+
+<view class='product-wrapper'>
+<block wx:for="{{ products }}" wx:key="item">
+<template is="product_list" data="{{ item }}"> </template>
+</block>
+</view>
+
+<template is="img-loader" data="{{ imgLoadList }}"></template>

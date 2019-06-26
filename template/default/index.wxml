@@ -1,0 +1,220 @@
+<import src="../../template/common/list.wxml"  />
+<import src="../../template/common/tabbar.wxml"  />
+<import src="../../template/common/shopInfo.wxml"  />
+
+<template name="default">
+<!--顶部导航轮播-->
+<!-- <scroll-view scroll-y="true"  scroll-top="0"  bindscrolltolower="pullUpLoad" bindscroll="scrollFunc" style="height: {{ winHeight*3 }}px;"> -->
+<view class="yishu-index-swiper" >
+  <swiper indicator-dots="{{ swiperSet.indicatorDots }}" autoplay="{{ swiperSet.autoplay }}" interval="{{ swiperSet.interval }}" duration="{{ swiperSet.duration }}" circular="{{ swiperSet.circular }}">
+    <block wx:for="{{imgUrls}}" wx:key="item">
+      <swiper-item >
+        <image src="{{item.image}}" mode="widthFix" data-link="{{ item.mini_link }}" bindtap="mini_redirect" />
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+<!--/顶部导航轮播-->
+
+<!--顶部下菜单导航-->
+<view class="weui-grids index-function-grids">
+  <navigator class="weui-grid" url='../cat/cat' open-type="switchTab">
+    <view class="weui-grid__icon">
+      <image src="https://shop-model.yunlike.cn/images/default/index/grid1.png" alt=""></image>
+    </view>
+    <view class="weui-grid__label">全部分类</view>
+  </navigator>
+  <navigator url="../brands/brands" class="weui-grid" wx:if="{{ switch.FUNC_BRAND == true }}">
+    <view class="weui-grid__icon">
+      <image src="../../images/default/index/grid2.png" alt=""></image>
+    </view>
+    <view class="weui-grid__label">品牌街</view>
+  </navigator>
+  <!-- <navigator class="weui-grid" url='../product_promp/product_promp' wx:if="{{ switch.FUNC_PRODUCT_PROMP == true }}">
+    <view class="weui-grid__icon">
+      <image src="https://shop-model.yunlike.cn/images/default/index/grid3.png" alt=""></image>
+    </view>
+    <view class="weui-grid__label">优惠活动</view>
+  </navigator> -->
+  <navigator url="../team_sale/team_sale" class="weui-grid" wx:if="{{ switch.FUNC_TEAMSALE == true }}">
+    <view class="weui-grid__icon">
+      <image src="https://shop-model.yunlike.cn/images/default/index/grid4.png" alt=""></image>
+    </view>
+    <view class="weui-grid__label">团购</view>
+  </navigator>
+  <navigator url="../flash_sale/flash_sale" class="weui-grid" wx:if="{{ switch.FUNC_FLASHSALE == true }}">
+    <view class="weui-grid__icon">
+      <image src="https://shop-model.yunlike.cn/images/default/index/grid5.png"  alt=""></image>
+    </view>
+    <view class="weui-grid__label">秒杀专场</view>
+  </navigator>
+  <navigator url="../coupon/coupon" class="weui-grid" wx:if="{{ switch.FUNC_COUPON == true }}">
+    <view class="weui-grid__icon">
+      <image src="https://shop-model.yunlike.cn/images/default/index/grid6.png" mode='widthFix' alt=""></image>
+    </view>
+    <view class="weui-grid__label">优惠券</view>
+  </navigator>
+  <navigator url="../orders/orders" class="weui-grid">
+    <view class="weui-grid__icon">
+      <image src="https://shop-model.yunlike.cn/images/default/index/grid7.png" alt=""></image>
+    </view>
+    <view class="weui-grid__label">我的订单</view>
+  </navigator>
+  <navigator url="../myself/myself" class="weui-grid" open-type="switchTab">
+    <view class="weui-grid__icon">
+      <image src="https://shop-model.yunlike.cn/images/default/index/grid8.png" alt=""></image>
+    </view>
+    <view class="weui-grid__label">个人中心</view>
+  </navigator>
+</view>
+<!--/顶部下菜单导航-->
+
+
+<!-- 板块推荐分类导航 -->
+<view class="weui-panel__bd index-recommend-cat">
+<block wx:for="{{catRecommend}}" wx:key="item">
+  <navigator url="../category/categoty?cat_id={{ item.id }}" class="weui-media-box weui-media-box_appmsg">
+    <view class="weui-media-box__hd">
+      <image class="weui-media-box__thumb" src="{{ item.image }}" alt=""></image>
+    </view>
+    <view class="weui-media-box__bd">
+      <text class="weui-media-box__title">{{ item.name }}</text>
+      <text class="weui-media-box__desc" wx:if="{{ item.brief !=null}}">{{ item.brief }}</text>
+    </view>
+  </navigator>
+</block>
+</view>
+<!-- 板块推荐分类导航 -->
+
+<!-- 秒杀抢购 -->
+<view wx:if="{{ flash_sale_product.length > 0 && switch.FUNC_FLASHSALE == true}}">
+  <navigator url="../flash_sale/flash_sale">
+      <view class="weui-cells" >
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd title-img" id="count_timer">
+            <image src="../../images/default/index/miaosha.png" style="vertical-align: middle; margin-right: 10px;"></image>
+            <text style="vertical-align: middle">限时秒杀</text>
+            <view style="vertical-align: middle" wx:if="{{  }}">
+              <text class="time time-hour">  {{timer[0]}}</text> :
+              <text class="time time-minute">  {{timer[1]}}</text> :
+              <text class="time time-second">  {{timer[2]}}</text>
+            </view>
+          </view>
+          <view class="weui-cell__ft">更多</view>
+        </view>
+      </view>
+  </navigator>
+
+  <!-- 秒杀抢购商品列表-->
+  <view class="product-wrapper" >
+    <block wx:for="{{ flash_sale_product }}" wx:key="item">
+    <navigator class="product-item3" url="../product/product?product_id={{ item.product_id }}" hover-class='none'>
+        <view class="img">
+          <image src="{{ item.image }}"></image>
+        </view>
+        <view class="title">{{ item.product_name }}</view>
+        <view class="price">¥{{ item.price }}
+          <text class="cross">¥{{ item.origin_price }}</text>
+        </view>
+      </navigator>
+    </block>
+  </view>
+</view>
+<!-- 秒杀抢购 -->
+
+<!-- 拼团专区 -->
+<view wx:if="{{  team_sale_product.length > 0 && switch.FUNC_TEAMSALE == true}}">
+<navigator class="weui-cells" url="../team_sale/team_sale">
+  <view class="weui-cell weui-cell_access">
+    <view class="weui-cell__bd title-img">
+      <image src="../../images/default/index/piece.png" style="vertical-align: middle; margin-right: 10px;"></image>
+      <text style="vertical-align: middle">拼团专区</text>
+    </view>
+    <view class="weui-cell__ft">更多</view>
+  </view>
+</navigator>
+
+<view class="product-wrapper" >
+  <block wx:for="{{ team_sale_product }}" wx:key="item">
+   <navigator class="product-item3" url="../product/product?product_id={{ item.product_id }}" hover-class='none'>
+    <!-- <view class="product-item3"> -->
+      <view class="img">
+        <image src="{{ item.share_img }}"></image>
+      </view>
+      <view class="title">{{ item.product_name }}</view>
+      <view class="price">¥{{ item.price }}
+        <text class="cross">已拼{{ item.sales_sum }}件</text>
+      </view>
+    </navigator>
+  </block>
+</view>
+</view>
+<!-- 拼团专区 -->
+
+<!-- 新品推荐 -->
+<view wx:if="{{ switch.FUNC_PRODUCT_PROMP == true }}">
+  <view style="background-color: #fff;padding-top: 1.5rem; margin-top: 5px;">
+      <view class="theme-title">
+        <view class="content">
+          <image src="../../images/default/index/like.png" style="vertical-align: middle; margin-right: 10px;"></image>新品推荐
+        </view>
+      </view>
+  </view>
+
+  <view class="product-wrapper" style='padding: 5px 0px; justify-content: space-between;'>
+      <block wx:for="{{newProduct}}" wx:key="item">
+          <template is="product_list" data="{{ item }}"></template>
+      </block>
+  </view>
+</view>
+<!-- 新品推荐 -->
+
+<!-- 促销活动
+<view style="background-color: #fff;padding-top: 1.5rem; margin-top: 5px;">
+  <view class="theme-title">
+    <view class="content">
+      <image src="../../images/default/index/promotion.png" style="vertical-align: middle; margin-right: 10px;"></image>促销活动
+    </view>
+  </view>
+</view> -->
+
+<!-- <view class="product-wrapper" style='padding: 5px 0px; justify-content: space-between;'>
+  <block wx:for="{{team_sale_product}}" wx:key="item">
+      <template is="product_list" data="{{ item }}"> </template>
+  </block>
+
+  <block wx:for="{{flash_sale_product}}" wx:key="item">
+    <template is="product_list" data="{{ item }}"> </template>
+  </block>
+
+</view> -->
+<!-- 促销活动 -->
+
+<!-- 全部产品 -->
+<view style="background-color: #fff;padding-top: 1.5rem; margin-top: 5px;">
+  <view class="theme-title">
+    <view class="content">
+      <image src="../../images/default/index/all.png" style="vertical-align: middle; margin-right: 10px;"></image>全部产品
+    </view>
+  </view>
+</view>
+
+
+<view class="product-wrapper" style='padding: 5px 0px; justify-content: space-between;'>
+<block wx:for="{{ allProduct }}" wx:key="item">
+<template is="product_list" data="{{ item }}"> </template>
+ </block>
+ <!-- <view id="loading-tips" style="padding: 15px; color: #999; font-size: 14px; margin:0 auto;text-align: center;" wx:if="{{ whetherShowMore }}">别再扯了，已经没有了</view>-->
+</view> 
+  <template is="shopInfo" wx:if="{{ whetherShowMore }}"></template>
+
+ <!-- </scroll-view> -->
+  <template is="tabBar" data="{{ tabBar:tabBar }}"></template>
+  
+</template>
+
+
+
+
+
+

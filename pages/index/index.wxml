@@ -1,0 +1,11 @@
+<import src="../../template/default/index.wxml"  />
+<import src="../../template/theme1/index.wxml"  />
+<import src="../../template/social/index.wxml"  />
+
+<import src="../../template/common/img-loader/img-loader.wxml"/>
+
+<template is="{{ theme }}"  data="{{...themeData}}"></template>
+
+<template is="img-loader" data="{{ imgLoadList }}"></template>
+
+       <!-- <button open-type="getUserInfo" bindgetuserinfo='getInfo' style="position:relative;bottom:80px;">点击授权</button>        -->

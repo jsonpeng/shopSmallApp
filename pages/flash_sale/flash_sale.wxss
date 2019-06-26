@@ -1,0 +1,20 @@
+/* pages/flash_sale/flash_sale.wxss */
+.index-function-grids{border:none;}
+.index-function-grids .weui-grid{width: 20%;padding: 10px;border: none;}
+.weui-cell__bd image{width:32px;height: 32px;}
+#count_timer view{display: inline-block;}
+#count_timer view text{background-color: #ff4e44;padding:0 3px;}
+
+navigator.flash-sale-item{display: flex;width: 100%;padding-left: 0;}
+navigator.flash-sale-item .product-name{margin-bottom:0;overflow: hidden;text-overflow: ellipsis;display: box;line-clamp: 2;}
+.flash-sale-item .weui-media-box_hd{width: 50px;display:inline-block;}
+.flash-sale-item .weui-media-box__bd{flex: 1;}
+.flash-sale-item .weui-meida-box__bd .weui-media-box_title{font-size:16px;}
+.weui-cell{padding:7.5px 0;}
+.weui-media-box_desc .fol-l{float: left;}
+.weui-media-box_desc .price{font-size:16px;}
+.weui-media-box_desc .price .pass-price{font-size: 12px;color:#9e9e9e;text-decoration: line-through;}
+.weui-media-box_desc .product-sales{font-size: 12px;color:#9e9e9e;}
+.weui-media-box_appmsg .weui-media-box__hd{width: 80px;height: 80px;overflow: hidden;}
+.flash-sale-item .weui-media-box__hd .product-img{width: 80px;height: 80px;position: relative;}
+.weui-media-box_desc .weui-media-box_ft{position: relative;font-size: 14px;padding: 2px 5px;border-radius: 5px;color: #fff;}

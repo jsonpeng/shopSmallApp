@@ -1,0 +1,8 @@
+<!--pages/product_promp/product_promp.wxml-->
+<block wx:for="{{product_proms}}" wx:for-item="item">
+<navigator class="theme-item" url="list?id={{item.id}}">
+  <image src="{{item.image}}" mode='widthFix'></image>
+  <view class="title oneline">{{ item.name }}</view>
+  <!--div class="subtitle oneline">专题描述</div-->
+</navigator>
+</block>

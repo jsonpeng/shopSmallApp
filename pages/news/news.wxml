@@ -1,0 +1,6 @@
+<import src="../../wxParse/wxParse.wxml" />
+<view class="post-title">{{notices.name}}</view>
+<view class="post-sub-title">亲爱的全球购发表于 <text> {{notices.currentTime}}</text></view>
+<view class="post-content">
+  <template is="wxParse" data="{{ wxParseData:contents.nodes  }}" />
+</view>

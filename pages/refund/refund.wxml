@@ -1,0 +1,131 @@
+<!--pages/refund/refund.wxml-->
+<view class='app-wrapper'>
+  <view href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg">
+    <view class="weui-media-box__hd">
+      <image class="weui-media-box__thumb" src="https://lorempixel.com/640/640/?83630" alt=""></image>
+    </view>
+    <view class="weui-media-box__bd">
+      <view class="weui-media-box__title">邓文君 </view>
+      <view class="weui-media-box__desc">价格:
+        <text>3</text> 数量: x1</view>
+    </view>
+  </view>
+  <form method="POST" action="/postRefund/1" enctype="multipart/form-data">
+    <!-- <input type="hidden" name="_token" value="3tJDeBAEqbmNM8MjgakFIrwQnKhtFpsNMv8kbDw5" /> -->
+    <view class="contnet-wrapper">
+      <view class="servicetype">服务类型：</view>
+      <view class="refund-types weui-cell">
+        <view class="refund-type" type='0'>仅退款</view>
+        <view class="refund-type" type='1'>退货退款</view>
+        <view class="refund-type active" type='2'>换货</view>
+        <input type="hidden" name="type" value="2" />
+      </view>
+      <view class="applybox clearfloat">
+        <view class="applynum">申请数量</view>
+        <view class="choosebox">
+          <view class="counter">
+            <i class="fa fa-minus" style="float:left;" onclick="cartdel()"></i>
+            <input type="number" name="count" value="1" readonly="readonly" />
+            <i class="fa fa-plus" style="float:left;" onclick="cartadd()"></i>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="weui-cell weui-cell-margin">
+      <view class="goodsStatus">货物状态</view>
+    </view>
+    <view class="weui-cells weui-cells_checkbox ">
+      <label class="weui-cell weui-check__label" for="x11">
+        <view class="weui-cell__hd">
+          <input type="radio" class="weui-check" name="is_receive" id="x11" value="1" checked="checked" />
+          <i class="weui-icon-checked"></i>
+        </view>
+        <view class="weui-cell__bd">
+          <view>收到货.</view>
+        </view>
+      </label>
+      <label class="weui-cell weui-check__label" for="x12">
+        <view class="weui-cell__hd">
+          <input type="radio" class="weui-check" name="is_receive" id="x12" value="0" />
+          <i class="weui-icon-checked"></i>
+        </view>
+        <view class="weui-cell__bd">
+          <view>未收到货.</view>
+        </view>
+      </label>
+    </view>
+    <view class="contnet-wrapper">
+    </view>
+    <view class="weui-cell weui-cell_access reason">
+      <view class="weui-cell__bd">提交原因</view>
+      <view class="weui-cell__ft" onclick="showCancelReason()">
+        <text id="cancelReason">请选择取消原因</text>
+        <image src="" alt=""></image>
+        <input type="hidden" name="reason" />
+      </view>
+    </view>
+    <view class="vux-x-textarea section-margin">
+      <view class="remark remark-dark">问题描述</view>
+      <view class="weui-cell__bd">
+        <textarea autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="" rows="3" cols="30" maxlength="200" class="weui-textarea" name="remark"></textarea>
+        <view class="weui-textarea-counter">
+          <text>0</text>/200</view>
+      </view>
+    </view>
+    <view class="weui-cells weui-cells_form">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <view class="weui-uploader">
+            <view class="weui-uploader__hd">
+              <view class="weui-uploader__title">上传照片</view>
+            </view>
+            <view class="weio-uploader__bd">
+              <ul class="weui-uploader__files">
+                <li class="weui-uploader__file" id="uploader0" data-status="0"></li>
+                <input name="file" type="file" class="upload_input" id="uploadfile1" onchange="change(this)" data-data="0" />
+                <li class="weui-uploader__file" id="uploader1" data-status="0"></li>
+                <input name="file" type="file" class="upload_input" id="uploadfile2" onchange="change(this)" data-data="1" />
+                <li class="weui-uploader__file" id="uploader2" data-status="0"></li>
+                <input name="file" type="file" class="upload_input" id="uploadfile3" onchange="change(this)" data-data="2" />
+                <li class="weui-uploader__file" id="uploader3" data-status="0"></li>
+                <input name="file" type="file" class="upload_input" id="uploadfile4" onchange="change(this)" data-data="3" />
+                <li class="weui-uploader__file" id="uploader4" data-status="0"></li>
+                <input name="file" type="file" class="upload_input" id="uploadfile5" onchange="change(this)" data-data="4" />
+              </ul>
+
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="weui-cell weui-cell-tips">
+        <view>为帮助我们解决问题，请上传照片，最多5张，每张不超过5M</view>
+      </view>
+    </view>
+
+    <view>
+      <view class="weui-mask" id="iosMaskCancel" style="display: none"></view>
+      <view class="weui-actionsheet" id="iosActionsheet2">
+        <view class="weui-actionsheet__title">
+          <view class="weui-actionsheet__title-text">取消原因</view>
+        </view>
+        <view class="weui-actionsheet__menu">
+          <view class="weui-actionsheet__cell" onclick="cancelOrderConfirm('订单不能按时送达')">订单不能按时送达</view>
+          <view class="weui-actionsheet__cell" onclick="cancelOrderConfirm('操作有误(商品，地址等)')">操作有误(商品，地址等)</view>
+          <view class="weui-actionsheet__cell" onclick="cancelOrderConfirm('重复下单、误下单')">重复下单、误下单</view>
+          <view class="weui-actionsheet__cell" onclick="cancelOrderConfirm('其他渠道价格更低')">其他渠道价格更低</view>
+          <view class="weui-actionsheet__cell" onclick="cancelOrderConfirm('该商品降价了')">该商品降价了</view>
+          <view class="weui-actionsheet__cell" onclick="cancelOrderConfirm('不想买了')">不想买了</view>
+          <view class="weui-actionsheet__cell" onclick="cancelOrderConfirm('其他原因')">其他原因</view>
+        </view>
+        <view class="weui-actionsheet__action">
+          <view class="weui-actionsheet__cell" id="iosActionsheet2Cancel">取消</view>
+        </view>
+      </view>
+    </view>
+
+
+    <view class="weui-cells submit">
+      <input type="submit" name="提交" />
+    </view>
+  </form>
+</view>

@@ -1,0 +1,86 @@
+<import src="../../template/common/tabbar.wxml" />
+
+<!-- <view wx:if="{{user.userLevel.discount<100}}" class="weui-cell rollTip">
+  <image src="../../images/tips.png" alt=""></image>
+  <text>尊敬的{{ user.userLevel.name }}您好！现在购物您可享受{{ user.userLevel.discount }}折优惠！</text>
+</view> -->
+
+<!--购物车中有商品的样式-->
+<view wx:if="{{ hadProduct }}">
+  <view class='shopCart'>
+    <block wx:for="{{ shopCartList }}" wx:key="item" wx:for-index="index">
+    <!--不带规格的商品-->
+      <view class="zcjy-product-cart" bindlongtap='delCartItem' data-index="{{ index }}" wx:if="{{ item.types==0 }}">
+        <view class="productImage">
+          <image src="{{ item.product.image }}"></image>
+        </view>
+        <icon wx:if="{{ item.selected }}" bindtap='checkSelected' data-index="{{ index }}" type="success" color="{{ maincolor }}" size="20" class="checkingbutton2" />
+        <text wx:if="{{ !item.selected }}" bindtap='checkSelected' data-index="{{ index }}" class='circle  checkingbutton2' style='display:inline-block;width:20px;height:20px;border-radius:50%;border:1px solid #eee; vertical-align:middle;'></text>
+        <view class="proudct-info-wrapper">
+          <view class="product-name">{{ item.name }}</view>
+          <view class="price oneline">¥{{ item.price }}</view>
+          <view class="tr cart-item">
+            <view class="counter">
+              <i class="fa fa-minus" style="float:left;" data-index="{{ index }}" bindtap="numDel"></i>
+              <input type="number" bindinput='numInput'  data-index="{{ index }}" value="{{ item.qty }}" />
+              <i class="fa fa-plus" style="float:left;" data-index="{{ index }}" bindtap="numAdd"></i>
+            </view>
+          </view>
+        </view>
+      </view>
+
+   <!--带规格的商品-->
+      <view class="zcjy-product-cart" bindlongtap='delCartItem' data-index="{{ index }}" wx:if="{{ item.types==1 && item.spec.length!=0}}">
+        <view class="productImage">
+          <image src="{{ item.spec.image }}"></image>
+        </view>
+        <i class="weui-icon-success checkingbutton2"></i>
+        <i class="weui-icon-circle checkingbutton2" style="display: none;"></i>
+             <icon wx:if="{{ item.selected }}" bindtap='checkSelected' data-index="{{ index }}" type="success" color="#ff4e44" size="20" class="checkingbutton2" />
+        <text wx:if="{{ !item.selected }}" bindtap='checkSelected' data-index="{{ index }}" class='circle  checkingbutton2' style='display:inline-block;width:20px;height:20px;border-radius:50%;border:1px solid #eee; vertical-align:middle;'></text>
+        <view class="proudct-info-wrapper">
+          <view class="product-name ">{{ item.name }}</view>
+          <view class="remark oneline">规格: {{ item.spec.key_name }}</view>
+          <view class="price oneline">¥{{ item.price }}</view>
+          <view class="tr cart-item">
+            <view class="counter">
+              <i class="fa fa-minus" style="float:left;" data-index="{{ index }}" bindtap="numDel"></i>
+              <input type="number"bindinput='numInput'   data-index="{{ index }}"  value="{{ item.qty }}" />
+              <i class="fa fa-plus" style="float:left;" data-index="{{ index }}" bindtap="numAdd"></i>
+            </view>
+          </view>
+        </view>
+      </view>
+    </block>
+
+    <view class="checkwrapper product-checker">
+      <span style="width: 0.5rem; display: inline-block;"></span>
+      <span id="count">{{ allNum }}</span> 件商品, 总计
+      <span class="price_final" id="total"> ¥ {{ allCount }}元</span>
+      <view class="right-botton01" bindtap="subCart" style='background:{{ maincolor }}'>结算
+        <span></span>
+      </view>
+    </view>
+  </view>
+</view>
+
+<!--购物车中没有商品的显示样式-->
+<view wx:if="{{!hadProduct}}">
+  <view class="empty">
+    <view class="no-shoppingcart">
+      <image src="../../images/emptycart.png"></image>
+      <view class="title">购物车是空的~</view>
+      <view class="des">赶快去选购商品吧！</view>
+    </view>
+    <view class="checkwrapper product-checker">
+      <navigator class="right-botton01"  style="width: 100%;background:{{ maincolor }}" url="../cat/cat" hover-class='none'>马上选购</navigator>
+
+    </view>
+  </view>
+</view>
+
+<!--/购物车中没有商品的显示样式-->
+
+
+
+<template is="tabBar" data="{{ tabBar:tabBar }}"></template>

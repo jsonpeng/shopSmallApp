@@ -1,0 +1,2 @@
+/* pages/withdrawal/withdrawal.wxss */
+ .withdraw::before{border-top:0;} 

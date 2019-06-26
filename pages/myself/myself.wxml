@@ -1,0 +1,3 @@
+<import src="../../template/default/myself.wxml"  />
+<import src="../../template/social/myself.wxml"  />
+<template is="{{ theme }}"  data="{{...themeData}}"></template>

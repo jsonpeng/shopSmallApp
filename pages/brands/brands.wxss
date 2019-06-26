@@ -1,0 +1,4 @@
+/* pages/brands/brands.wxss */
+swiper{height: 170px;}
+swiper image{width: 100%;}
+.weui-grids image{width:30px;height: 30px;}

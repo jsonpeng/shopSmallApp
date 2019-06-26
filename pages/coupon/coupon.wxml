@@ -1,0 +1,83 @@
+<!--pages/coupon/coupon.wxml-->
+<view class="discount">
+  <view class="weui-tab">
+    <view class="weui-navbar">
+      <view class="weui-navbar__item {{ couponsTab==-1?'weui-bar__item_on':'' }}" bindtap='switchTab' data-id="-1">
+         <text>全部</text>
+      </view>
+      <view class="weui-navbar__item {{ couponsTab==0?'weui-bar__item_on':'' }}"  bindtap='switchTab' data-id="0">
+         <text>待使用</text>
+      </view>
+      <view class="weui-navbar__item {{ couponsTab==2?'weui-bar__item_on':'' }}"  bindtap='switchTab' data-id="2">
+         <text>已使用</text>
+      </view>
+      <view class="weui-navbar__item {{ couponsTab==3?'weui-bar__item_on':'' }}"  bindtap='switchTab' data-id="3">
+         <text>已失效</text>
+      </view>
+    </view>
+    <view class="weui-tab__panel">
+
+      <block wx:for="{{ coupons }}" wx:for-item="item" wx:key="item" wx:for-index="index">
+      <view class="weui_planel_item " >
+        <view class="slide-toggle" wx:if="{{ item.status==4 }}">
+          <image src="../../images/cancel.png" alt=""></image>
+        </view>
+        <view class="slide-toggle" wx:if="{{ item.status==3 }}">
+          <image src="../../images/guoqi.png" alt=""></image>
+        </view>
+        <view class="slide-toggle" wx:if="{{ item.status==2 }}">
+          <image src="../../images/used.png" alt=""></image>
+        </view>
+        <view class="slide-toggle" wx:if="{{ item.status==1 }}">
+          <image src="../../images/freeze.png" alt=""></image>
+        </view>
+        <view class="slide-toggle" wx:if="{{ item.status==0 }}">
+           <image class="open"  data-index="{{ index }}" bindtap='actionOpen' data-status="true" src="../../images/top.png" alt="" wx:if="{{ !item.status_state }}"></image> 
+           <image class="shut" data-index="{{ index }}" bindtap='actionOpen'  data-status="false" src="../../images/bottom.png" alt="" wx:if="{{ item.status_state==true || item.status_state=='true' }}"></image> 
+        </view>
+
+        <view class="weui-panel_bd">
+          <view bindtap='actionOpen' data-index="{{ index }}"  data-status="{{ !item.status_state}}" class="weui-media-box weui-media-box_appmsg" style="align-items:flex-start;">
+       
+            <view class="weui-media-box_hd" wx:if="{{ item.coupon.type=='打折' }}" style='color:{{maincolor}}'>
+              <view class="type" style='color:{{maincolor}};border-color:{{maincolor}}'>折扣券</view>
+              <view class="sum" style='color:{{maincolor}}'>
+                <text>{{item.coupon.discount*0.1}}</text>折</view>
+            </view>
+          
+            <view class="weui-media-box_hd" wx:if="{{ item.coupon.type=='满减' }}" style='color:{{maincolor}}'>
+              <view class="type" style='color:{{maincolor}};border-color:{{maincolor}}'>满减券</view>
+              <view class="sum" style='color:{{maincolor}}'>
+                <text>{{ item.coupon.given }}</text>元</view>
+            </view>
+
+            <view class="weui-media-box_bd">
+              <text class="weui-media-box_title">{{ item.coupon.name }}</text>
+              <text class="weui-media-box_desc" wx:if="{{ item.coupon.range==0 }}">满{{ item.coupon.base }}元可用,全场通用</text>
+              <text class="weui-media-box_desc" wx:if="{{ item.coupon.range==1 }}">满{{ item.coupon.base }}元可用,指定分类</text>
+              <text class="weui-media-box_desc" wx:if="{{ item.coupon.range==2 }}">满{{ item.coupon.base }}元可用,指定商品</text>
+              <text class="weui-media-box_desc" wx:if="{{ item.coupon.time_type==0}}">使用有效期：{{ item.time_begin }}-{{ item.time_end }}</text>
+              <text class="weui-media-box_desc" wx:if="{{ item.coupon.time_type!=0}}">使用有效期：领券后{{ item.coupon.expire_days }}天</text>
+            </view>
+          </view>
+        </view>
+        <view class="weui-media-box weui-media-box_text" style="display:{{ item.status_state?'block':'none' }};">
+          1、优惠券有效期在规定的时间范围内，过期则无法使用；2、优惠券不能与部分团购商品及特价商品同时使用，在提交订单时系统有提示哪些不能使用优惠券；3、优惠券不能抵扣运费；
+        </view>
+        <view class="weui-media-box cut_line">
+          <view class="border"></view>
+          <view class="weui-cell-fl"></view>
+          <view class="weui-cell-fr"></view>
+        </view>
+        <view class="weui-media-box link" style='color:{{maincolor}}'>
+          <navigator  wx:if="{{ item.status==0 }}" style='color:{{maincolor}}'>立即使用</navigator>
+          <navigator  wx:if="{{ item.status==1 }}" style='color:{{maincolor}}'>已冻结</navigator>
+          <navigator  wx:if="{{ item.status==2 }}" style='color:{{maincolor}}'>已使用</navigator>
+          <navigator  wx:if="{{ item.status==3 }}" style='color:{{maincolor}}'>已过期</navigator>
+          <navigator  wx:if="{{ item.status==4 }}" style='color:{{maincolor}}'>已作废</navigator>
+        </view>
+      </view>
+      </block>
+    </view>
+  </view>
+</view>

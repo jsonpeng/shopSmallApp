@@ -1,0 +1,384 @@
+<import src="../../template/common/list.wxml" />
+<import src="../../template/common/tabbar.wxml" />
+<import src="../../template/common/tabbar.wxml" />
+<import src="../../template/common/shopInfo.wxml" />
+
+<template name="social">
+  <view class="app-wrapper" wx:if="{{ tab==0 }}">
+    <view class="page__bd">
+      <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+          <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{search_val}}" focus="{{inputShowed}}" bindinput="searchword" />
+            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
+            </view>
+          </view>
+          <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索</view>
+          </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" bindtap="searchCancel" hidden="{{!inputShowed}}">取消</view>
+      </view>
+      <view class="weui-cells searchbar-result" wx:if="{{ search_product_list.length>0 }}">
+        <block wx:for="{{ search_product_list }}" wx:key="key" wx:for-key="item">
+          <navigator url="../product/product?product_id={{ item.share_title!=null?item.product_id:item.id }}" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+              <view>{{ item.name }}</view>
+            </view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+    <!-- 商品分类 -->
+    <view class="all_products">
+      <scroll-view scroll-x="false" scroll-top="{{ scrollTop }}" scroll-y="true" bindscroll="scrollFunc" bindscrolltolower="scrollFuncToLower" style='height:width:auto'>
+        <view class="slide-box nav-scroll">
+          <view class="slide-warp">
+            <view class="slide-item {{ tab==0 ? 'active' : '' }}" data-index="0" bindtap="switchtab">
+              首页
+            </view>
+
+            <block wx:for="{{ cats_root }}" wx:key="item" wx:for-index="index">
+              <view class="slide-item {{ tab==index+1 ? 'active' : '' }}" data-id="{{ item.id }}" data-index="{{ index+1 }}" data-slug="{{ item.slug }}" bindtap="switchtab">
+                {{ item.name }}
+              </view>
+            </block>
+
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+
+    <!-- 首页广告 -->
+    <swiper indicator-dots="{{  bannerSet.indicatorDots }}" autoplay="{{  bannerSet.autoplay}}" vertical="{{  bannerSet.vertical }}" interval="{{  bannerSet.interval }}" duration="{{  bannerSet.duration }}" circular="{{ bannerSet.circular}}">
+      <block wx:for="{{imgUrls}}" wx:key="key" wx:for-item="item">
+        <swiper-item>
+          <view data-link="{{ item.mini_link }}" bindtap="mini_redirect" >
+            <image src="{{item.image}}" mode="widthFix"></image>
+          </view >
+        </swiper-item>
+      </block>
+    </swiper>
+
+    <!-- 资讯 -->
+    <view class="weui-cell notice">
+      <view class="weui-cell__hd">
+        <view>NOTICE</view>
+      </view>
+      <view class="weui-cell__bd txtScroll-top">
+        <view class="bd">
+          <view class="tempWrap" style="overflow:hidden; position:relative; height:24px">
+
+            <swiper indicator-dots="{{ swiperSet.indicatorDots }}" autoplay="{{ swiperSet.autoplay}}" vertical="{{ swiperSet.vertical }}" interval="{{ swiperSet.interval }}" duration="{{ swiperSet.duration }}" circular="{{swiperSet.circular}}">
+              <block wx:for="{{ notices }}" wx:key="item" wx:for-index="index">
+                <swiper-item>
+                  <!-- <navigator url="../webview/webview?url=https://quanqiugo.club/webview/notices/{{ item.id }}"> -->
+                  <navigator url="../news/news?news_id={{ item.id }}">
+                    <text class="title">亲爱的全球GO</text>
+                    <text class="content">{{ item.name }}</text>
+                  </navigator>
+                </swiper-item>
+              </block>
+
+            </swiper>
+          </view>
+        </view>
+      </view>
+    </view>
+
+
+    <!-- 标题 -->
+    <view class="top-title" wx:if="{{image_new !== ''&image_prmop !==''&image_sales_count !==''}}">
+      <view>精选分类</view>
+    </view>
+    <!-- 精选分类 -->
+    <view class="index-recommend-cat weui-cell" style="">
+      <navigator url="../product_of_type/product_of_type?id=1" class="left_content" style="">
+        <view class="weui-media-box__bd">
+          <image src='{{image_new}}' mode='widthFix'></image>
+        </view>
+      </navigator>
+      <view class="right_content">
+        <navigator url="../product_promp/product_promp" class="weui-media-box__bd" style="">
+          <image src='{{image_prmop}}' mode='widthFix'></image>
+        </navigator>
+        <navigator url="../product_of_type/product_of_type?id=2" class="weui-media-box__bd">
+          <image src='{{image_sales_count}}' mode='widthFix'></image>
+        </navigator>
+      </view>
+    </view>
+
+    <!-- 环球国家馆 -->
+    <view class="top-title">
+      <p>环球国家馆</p>
+    </view>
+
+    <view class="product-wrapper country-sum">
+      <view class="slide-box">
+        <view class="slide-warp">
+          <block wx:for="{{country}}" wx:key="item" wx:for-item="item">
+            <navigator class="slide-item" url="../country_type/country_type?country_id={{ item.id }}">
+              <image src="{{ item.image }}" alt="" mode='widthFix'></image>
+              <view class="intr">{{ item.name }}</view>
+            </navigator>
+          </block>
+        </view>
+      </view>
+    </view>
+
+
+
+    <!-- 今日限量秒杀-->
+    <view class="top-title theme-flash_sale" wx:if="{{flash_sale_product.length>0}}">
+      <view>今日限量秒杀</view>
+    </view>
+    <view class="product-wrapper theme-flash_sale" wx:if="{{flash_sale_product.length>0}}">
+      <view class="slide-box">
+        <view class="slide-warp">
+          <block wx:for="{{flash_sale_product}}" wx:key="key" wx:for-item="item">
+            <view class="slide-item">
+              <navigator class="product-item3" url="../product/product?product_id={{ item.product_id}}">
+                <view class="img">
+                  <image class="lazy" data-original="https://lorempixel.com/640/640/?40737" src="{{item.image}}" style="display: block;"></image>
+                </view>
+                <view class="title">{{item.product_name}}</view>
+                <view class="price">¥{{item.price}}
+                  <text class="cross">¥{{item.origin_price}}</text>
+                </view>
+              </navigator>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 拼团 -->
+    <view class="top-title theme-team_sale" wx:if="{{team_sale_product.length>0}}">
+      <view>拼团专区</view>
+    </view>
+
+    <view class="product-wrapper theme-team_sale" wx:if="{{team_sale_product.length>0}}">
+      <view class="slide-box">
+        <view class="slide-warp">
+          <block wx:for="{{team_sale_product}}" wx:key="key" wx:for-item="item">
+            <view class="slide-item">
+              <navigator class="product-item3" url="../product/product?product_id={{ item.product_id }}">
+                <view class="img">
+                  <image class="lazy" src="{{item.share_img}}"></image>
+                </view>
+                <view class="title">{{item.product_name}}</view>
+                <view class="price">¥{{item.price}}
+                  <text class="cross">¥{{item.origin_price}}</text>
+                </view>
+              </navigator>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 精选专题 -->
+
+
+    <!-- 更多商品 -->
+    <view class="top-title more-goods">
+      <view>更多商品</view>
+    </view>
+
+    <view class="product-wrapper more-goods scroll-container">
+      <block wx:for="{{ allProduct }}" wx:key="item">
+        <template is="product_list_social" data="{{ item }}"> </template>
+      </block>
+    </view>
+      <view id="loading-tips" style="padding: 15px; color: #999; font-size: 14px; margin:0 auto;text-align: center;" wx:if="{{ whetherShowMore }}">别再扯了，我是有底线的</view>
+    <!-- <view class="weui-loadmore" style='width:100%' wx:if="{{ !whetherShowMore }}">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view> -->
+
+
+  </view>
+
+  <!-- 其他分页 -->
+  <view class="app-wrapper" wx:if="{{ tab>0 }}">
+
+    <view class="page__bd">
+      <view class="weui-search-bar">
+        <view class="weui-search-bar__form">
+          <view class="weui-search-bar__box">
+            <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+            <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{search_val}}" focus="{{inputShowed}}" bindinput="searchword" />
+            <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+              <icon type="clear" size="14"></icon>
+            </view>
+          </view>
+          <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+            <icon class="weui-icon-search" type="search" size="14"></icon>
+            <view class="weui-search-bar__text">搜索</view>
+          </label>
+        </view>
+        <view class="weui-search-bar__cancel-btn" bindtap="searchCancel" hidden="{{!inputShowed}}">取消</view>
+      </view>
+      <view class="weui-cells searchbar-result" wx:if="{{ search_product_list.length>0 }}">
+        <block wx:for="{{ search_product_list }}" wx:key="key" wx:for-key="item">
+          <navigator url="../product/product?product_id={{ item.share_title!=null?item.product_id:item.id }}" class="weui-cell" hover-class="weui-cell_active">
+            <view class="weui-cell__bd">
+              <view>{{ item.name }}</view>
+            </view>
+          </navigator>
+        </block>
+      </view>
+    </view>
+    <!-- 商品分类 -->
+    <view class="all_products">
+      <scroll-view scroll-x="false" scroll-top="{{ scrollTop }}" scroll-y="true" bindscroll="scrollFunc" bindscrolltolower="scrollFuncToLower" style='height:width:auto'>
+        <view class="slide-box nav-scroll">
+          <view class="slide-warp">
+            <view class="slide-item {{ tab==0 ? 'active' : '' }}" data-index="0" bindtap="switchtab">
+              首页
+            </view>
+
+            <block wx:for="{{ cats_root }}" wx:key="item" wx:for-index="index">
+              <view class="slide-item {{ tab==index+1 ? 'active' : '' }}" data-id="{{ item.id }}" data-slug="{{ item.slug }}" data-index="{{ index+1 }}" bindtap="switchtab">
+                {{ item.name }}
+              </view>
+            </block>
+
+          </view>
+        </view>
+      </scroll-view>
+    </view>
+
+    <!-- 分页中banner -->
+    <view class='banner-img'>
+      <block wx:for="{{ imgUrls }}" wx:key="item" wx:for-index="index">
+        <image src="{{ item.image }}" mode='widthFix'></image>
+      </block>
+    </view>
+    <!-- 商品子分类列表导航 -->
+    <!-- 板块 -->
+    <view class="weui-grids index-function-grids">
+      <block wx:for="{{currentChildCat}}" wx:key="item" wx:for-item="item">
+        <navigator url="../category/categoty?level=2&cat_id={{ item.id }}&theme=social" class="weui-grid">
+          <view class="weui-grid__icon">
+            <image src="{{ item.image }}" alt=""></image>
+          </view>
+          <view class="weui-grid__label">{{ item.name }}</view>
+        </navigator>
+      </block>
+    </view>
+
+
+    <!-- 今日限量秒杀-->
+    <view class="top-title theme-flash_sale" wx:if="{{flash_sale_product.length>0}}">
+      <view>今日限量秒杀</view>
+    </view>
+    <view class="product-wrapper theme-flash_sale" wx:if="{{flash_sale_product.length>0}}">
+      <view class="slide-box">
+        <view class="slide-warp">
+          <block wx:for="{{flash_sale_product}}" wx:key="key" wx:for-item="item">
+            <view class="slide-item">
+              <navigator class="product-item3" url="../product/product?product_id={{ item.product_id}}">
+                <view class="img">
+                  <image class="lazy" data-original="https://lorempixel.com/640/640/?40737" src="{{item.image}}" style="display: block;"></image>
+                </view>
+                <view class="title">{{item.product_name}}</view>
+                <view class="price">{{item.price}}
+                  <text class="cross">{{item.origin_price}}</text>
+                </view>
+              </navigator>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 拼团 -->
+    <view class="top-title theme-team_sale" wx:if="{{team_sale_product.length>0}}">
+      <view>拼团专区</view>
+    </view>
+
+    <view class="product-wrapper theme-team_sale" wx:if="{{team_sale_product.length>0}}">
+      <view class="slide-box">
+        <view class="slide-warp">
+          <block wx:for="{{team_sale_product}}" wx:key="item" wx:for-item="item">
+            <view class="slide-item">
+              <navigator class="product-item3" url="../product/product?product_id={{ item.product_id }}">
+                <view class="img">
+                  <image class="lazy" src="{{item.share_img}}"></image>
+                </view>
+                <view class="title">{{item.product_name}}</view>
+                <view class="price">{{item.price}}
+                  <text class="cross">{{item.origin_price}}</text>
+                </view>
+              </navigator>
+            </view>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 标题 -->
+    <view class="top-title" wx:if="{{image_new !== ''&image_prmop !==''&image_sales_count !==''}}">
+      <view>精选分类</view>
+    </view>
+    <!-- 精选分类 -->
+    <view class="index-recommend-cat weui-cell" style="">
+      <navigator url="../product_of_type/product_of_type?id=1" class="left_content" style="">
+        <view class="weui-media-box__bd">
+          <image src='{{image_new}}' mode='widthFix'></image>
+        </view>
+      </navigator>
+      <view class="right_content">
+        <navigator url="../product_promp/product_promp" class="weui-media-box__bd" style="">
+          <image src='{{image_prmop}}' mode='widthFix'></image>
+        </navigator>
+        <navigator url="../product_of_type/product_of_type?id=2" class="weui-media-box__bd">
+          <image src='{{image_sales_count}}' mode='widthFix'></image>
+        </navigator>
+      </view>
+    </view>
+
+    <view class="top-title">
+      <p>环球国家馆</p>
+    </view>
+
+    <view class="product-wrapper country-sum">
+      <view class="slide-box">
+        <view class="slide-warp">
+          <block wx:for="{{country}}" wx:key="key" wx:for-item="item">
+            <navigator class="slide-item" url="../country_type/country_type?country_id={{ item.id }}">
+              <image src="{{ item.image }}" alt="" mode='widthFix'></image>
+              <view class="intr">{{ item.name }}</view>
+            </navigator>
+          </block>
+        </view>
+      </view>
+    </view>
+
+    <!-- 更多商品 -->
+    <view class="top-title more-goods">
+      <view>更多商品</view>
+    </view>
+    <view class="product-wrapper more-goods scroll-container">
+      <block wx:for="{{ allProduct}}" wx:key="item">
+        <template is="product_list_social" data="{{ item }}"> </template>
+      </block>
+    </view>
+    <!-- 加载更多 -->
+    <view class="weui-loadmore" style='width:100%' wx:if="{{ !whetherShowMore }}">
+      <view class="weui-loading"></view>
+      <view class="weui-loadmore__tips">正在加载</view>
+    </view>
+  </view>
+  <template is="shopInfo" wx:if="{{ whetherShowMore }}" data="{{ pagelist:pagelist }}"></template>
+  <!-- <view id="loading-tips" style="padding: 15px; color: #999; font-size: 14px; margin:0 auto;text-align: center;" wx:if="{{ whetherShowMore }}">别再扯了，我是有底线的</view> -->
+
+
+  <template is="tabBar" data="{{ tabBar:tabBar }}"></template>
+
+</template>

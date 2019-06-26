@@ -1,0 +1,80 @@
+<import src="../../template/common/list.wxml"  />
+<import src="../../template/common/tabbar.wxml"  />
+<import src="../../template/common/img-loader/img-loader.wxml"/>
+
+<!--大于等于2级分类-->
+<scroll-view   scroll-top="{{ scrollTop }}" scroll-y="true"  scroll-x="false" bindscroll="scrollFunc" bindscrolltolower="scrollFuncToLower" style='height:{{ winHeight }}px;width:auto' wx:if="{{ category_level >=2 }}">
+  <view  class="cat-left">
+      <block wx:for="{{ cat }}" wx:key="item" wx:for-index="index">
+          <view class="cat-row scroll-nav {{ index==tab?'active':'' }}" data-index="{{ index }}"  bindtap="switchtab" >{{ item.name }}</view>
+      </block>
+  </view>
+
+  <!--scroll-into-view="{{ cat[tab]['name'] }}" -->
+
+  <view class="cat-right">
+    <block wx:for="{{ cat }}" wx:key="item">
+      <view class="scroll-floor" >
+        <view class="weui-cells">
+          <navigator class="weui-cell weui-cell_access" url="../category/categoty?level=1&cat_id={{ item.id }}">
+            <view class="weui-cell__bd">
+              <text style="vertical-align: middle;">{{ item.name }}</text>
+            </view>
+            <view class="weui-cell__ft">更多</view>
+          </navigator>
+        </view>
+        <view class="list-item">
+        <block wx:for="{{ item.children }}" wx:key="item">
+          <navigator class="category-list-item" url="../category/categoty?level=2&cat_id={{ item.id }}">
+            <view class="img">
+              <image src="{{ item.image }}"></image>
+            </view>
+            <view class="name">{{ item.name }}</view>
+          </navigator>
+        </block>
+        </view>
+      </view>
+    </block>
+  </view>
+</scroll-view>
+
+<!--一级分类-->
+<scroll-view  scroll-x="false" scroll-top="{{ scrollTop }}" scroll-y="true" bindscroll="scrollFunc" bindscrolltolower="scrollFuncToLower" style='height:{{ winHeight }}px;width:auto' wx:if="{{ category_level == 1 }}">
+
+  <view class="slide-box nav-scroll">
+    <view class="slide-warp">
+        <view class="slide-item {{ tab==0 ? 'active' : '' }}" data-index="0" bindtap="switchtab">
+            全部   
+        </view>
+
+        <block wx:for="{{ cats_root }}" wx:key="item" wx:for-index="index">
+            <view class="slide-item {{ tab==index+1 ? 'active' : '' }}" data-id="{{ item.id }}" data-index="{{ index+1 }}" bindtap="switchtab">
+              {{ item.name }}
+            </view>
+        </block>
+     
+    </view>
+  </view>
+
+  <view class="product-wrapper" style='padding: 5px 0px; justify-content: space-between;'>
+    <block wx:for="{{ allProduct }}" wx:key="item">
+      <template is="product_list" data="{{ item }}"> </template>
+    </block>
+  </view>
+
+</scroll-view>
+
+<!--没有分类-->
+<scroll-view scroll-x="false" scroll-top="{{ scrollTop }}" scroll-y="true" bindscroll="scrollFunc" bindscrolltolower="scrollFuncToLower" style='height:{{ winHeight }}px;width:auto' wx:if="{{ category_level == 0 }}">
+
+  <view class="product-wrapper" style='padding: 5px 0px; justify-content: space-between;'>
+    <block wx:for="{{ allProduct }}" wx:key="item">
+      <template is="product_list" data="{{ item }}"> </template>
+    </block>
+  </view>
+
+</scroll-view>
+
+<template is="img-loader" data="{{ imgLoadList }}"></template>
+
+ <template is="tabBar" data="{{ tabBar:tabBar }}"></template> 

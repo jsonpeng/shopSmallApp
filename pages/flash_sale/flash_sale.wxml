@@ -1,0 +1,57 @@
+<!--pages/flash_sale/flash_sale.wxml-->
+<view class="weui-grids index-function-grids">
+  <block wx:for="{{ time_arr }}" wx:key="key" wx:for-index="index" wx:for-item="item">
+    <view data-index="{{ index }}" bindtap='switchTab' data-hour="{{ item }}" class="weui-grid {{ index==tab?'active-flashsale':'' }}"   style='background:{{maincolor}}'>
+      <text class="weui-grid__label">{{ item }}</text>
+      <text class="weui-grid__label label2">{{ index==0 ?'秒杀中':'即将开场' }}</text>
+    </view>
+  </block>
+</view>
+
+<view class="product-wrapper">
+  <block wx:for="{{ flash_sale_product }}" wx:key="key">
+      <view class="weui-cell">
+        <view class="weui-cell__bd">
+          <image src="http://temp.im/32x32/333/EEE" style="vertical-align: middle; margin-right: 10px;"></image>
+          <text style="vertical-align: middle; font-weight: bold;">限时秒杀</text>
+        </view>
+
+        <view class="weui-cell__ft" id="count_timer" style="color: #333;" wx:if="{{ tab==0 && !delay }}">距离本场结束:
+          <view>
+            <text class="time time-hour">{{ timer[0] }}</text>:
+            <text class="time time-minute">{{ timer[1] }}</text>:
+            <text class="time time-second">{{ timer[2] }}</text>
+          </view>
+        </view>
+
+        <view class="weui-cell__ft" id="count_timer" style="color: #333;" wx:if="{{ delay }}">已过期
+        </view>
+
+        <view class="weui-cell__ft" id="count_timer" style="color: #333;" wx:if="{{ tab>0 }}">活动还未开始
+        </view>
+
+      </view>
+    <navigator class="flash-sale-item weui-media-box weui-media-box_appmsg" url="../product/product?product_id={{ item.product_id }}">
+      <view class='weui-media-box__hd'>
+        <image class="product-img" src="{{ item.image }}"></image>
+      </view>
+      <view class='weui-media-box__bd'>
+        <view class='weui-media-box_title'>
+          <view class="product-name">{{ item.product_name }}</view>
+        </view>
+        <view class='weui-media-box_desc'>
+          <view class='fol-l'>
+            <view class="price">¥{{ item.price }}
+              <text class='pass-price'>¥{{ item.origin_price }}</text>
+            </view>
+            <view class="product-sales">还剩:{{ item.product_num }}件</view>
+          </view>
+          <view class='weui-media-box_ft'>
+            <view class="go" style='background:{{maincolor}}'>去抢购</view>
+          </view>
+        </view>
+      </view>
+    </navigator>
+  </block>
+
+</view>

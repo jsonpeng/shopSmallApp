@@ -1,0 +1,3 @@
+
+<web-view src="https://quanqiugo.club/webview/page/{{ slug }}"></web-view>
+

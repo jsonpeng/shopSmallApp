@@ -1,0 +1,27 @@
+<import src="../../template/common/list.wxml"  /> 
+<import src="../../template/common/img-loader/img-loader.wxml"/>
+
+<!-- <scroll-view scroll-y="true"  scroll-top="0"  bindscrolltolower="pullUpLoad" bindscroll="scrollFunc" style="height: {{ winHeight }}px;"> -->
+
+<view class="cat-selector">
+    <view  class="{{ tab==0?'active':'' }}">
+      <view data-url="../category/category?cat_id={{ currentCatId }}&level=current"  data-index="0" bindtap="switchtab" data-id="{{ currentCatId }}" hover-class='none'>全部商品</view>
+    </view>
+    <block wx:for="{{ currentChildCat }}" wx:key="item" wx:for-index="index">
+    <view  class="{{ tab==index+1?'active':'' }}">
+      <view data-url="../category/category?cat_id={{ item.id }}&level=current" data-index="{{ index+1 }}" bindtap="switchtab"  data-id="{{ item.id }}" hover-class='none'>{{ item.name }}</view>
+    </view>
+    </block>
+</view>
+
+
+<view class="product-wrapper" style="margin-top: 2rem;padding: 5px 0px; justify-content: space-between;">
+  <block wx:for="{{ currentProduct }}" wx:key="item">
+  <template is="product_list" data="{{ item }}"> </template>
+  </block>
+ 
+</view>
+ <view id="loading-tips" style="padding: 15px; color: #999; font-size: 14px; margin:0 auto;text-align: center;" wx:if="{{ themeData.whetherShowMore }}">别再扯了，我是有底线的</view>
+<!-- </scroll-view> -->
+
+<template is="img-loader" data="{{ imgLoadList }}"></template>

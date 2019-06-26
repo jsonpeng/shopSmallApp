@@ -1,0 +1,15 @@
+/* pages/address/address.wxss */
+/* navigator{background-color: #fff;} */
+page{padding-bottom:65px;}
+.weui-panel__bd{background-color: #fff;}
+.weui-panel__bd .weui-media-box{padding: 20px 15px;}
+.weui-cell__ft navigator{display: inline-block;}
+.addressAmend{border-top:1px solid #ececec;font-size: 14px;}
+.addressAmend .weui-cell__ft{font-size: 14px;}
+.weui-btn-bottom{text-align: center;color: #fff;}
+.address_items icon,.address_items text{margin-right: 5px;vertical-align: middle;}
+.weui-btn{height: 35px;line-height: 35px;text-align: center;}
+.weui-btn_primary{color: #fff;}
+.weui-btn_default{background-color: #e5e5e5;}
+.weui-btn-bottom .weui-btn{line-height:50px;height: 50px;}
+.delete{display: inline-block;color: #333;vertical-align:middle; }

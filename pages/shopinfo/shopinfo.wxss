@@ -1,0 +1,23 @@
+/* pages/shopinfo/shopinfo.wxss */
+/* pages/news/news.wxss */
+@import "../../wxParse/wxParse.wxss";
+page{background-color: #fff;}
+.post-title{
+    font-size: 18px;
+    color: #666;
+    padding: 15px 15px;
+    text-align: center;
+}
+.post-sub-title{
+    font-size: 14px;
+    color: #666;
+    padding: 5px 15px;
+    padding-top: 0;
+}
+.post-sub-title text{color:#999;}
+.post-content{
+    font-size: 15px;
+    line-height: 30px;
+    color: #666;
+    padding: 15px
+}

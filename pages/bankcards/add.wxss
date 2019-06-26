@@ -1,0 +1,4 @@
+/* pages/bankcards/add.wxss */
+.weui-cell__hd{width:120px;}
+.weui-btn{display: block;text-align: center;border:none;border-radius:20px;line-height: 40px;}
+.weui-btn_default{background-color: #eee; }

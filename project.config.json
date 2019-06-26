@@ -1,0 +1,49 @@
+{
+	"description": "项目配置文件。",
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "1.9.98",
+	"appid": "wx5669b891f3e907a7",
+	"projectname": "%E6%9C%B5%E6%8B%89%E8%AF%9A%E5%93%81",
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": -1,
+			"list": [
+				{
+					"id": 0,
+					"name": "1",
+					"pathName": "pages/brands/brands",
+					"query": ""
+				},
+				{
+					"id": 1,
+					"name": "2",
+					"pathName": "pages/myself/qrcode",
+					"query": ""
+				}
+			]
+		}
+	}
+}
